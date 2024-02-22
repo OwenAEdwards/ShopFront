@@ -1,5 +1,3 @@
-# Project Guidelines
-
 ## I. Backend Stuff
 
 1. **Most Important Initial Step**: Setting up Java - Spring Boot project, with Maven dependencies from the Spring Initializer.
