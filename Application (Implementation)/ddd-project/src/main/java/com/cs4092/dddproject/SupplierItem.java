@@ -1,2 +1,7 @@
-package com.cs4092.dddproject;public class SupplierItem {
+package com.cs4092.dddproject;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class SupplierItem {
 }
