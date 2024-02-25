@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS Products (
     brand VARCHAR(50),
     size VARCHAR(20),
     description TEXT
+    price DECIMAL(10, 2) NOT NULL
 );
 
 -- Create the Warehouses table
@@ -86,12 +87,6 @@ CREATE TABLE IF NOT EXISTS Stock (
     product_id INT NOT NULL,
     warehouse_id INT NOT NULL,
     quantity INT NOT NULL
-);
-
--- Create the ProductPrices table
-CREATE TABLE IF NOT EXISTS ProductPrices (
-    product_id INT PRIMARY KEY,
-    price DECIMAL(10, 2) NOT NULL
 );
 
 -- Create the Orders table
@@ -114,7 +109,7 @@ CREATE TABLE IF NOT EXISTS OrderItems (
 -- Create the DeliveryPlan table
 CREATE TABLE IF NOT EXISTS DeliveryPlan (
     order_id INT PRIMARY KEY,
-    delivery_type VARCHAR(20) NOT NULL, -- 'Express' or 'Standard'
+    delivery_type VARCHAR(20) NOT NULL, -- 'Express', 'Standard', or 'Customizable'
     delivery_price DECIMAL(10, 2) NOT NULL,
     delivery_date DATE NOT NULL,
     ship_date DATE NOT NULL
