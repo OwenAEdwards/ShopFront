@@ -11,7 +11,7 @@
 
 1. **Most Important Initial Step**: Set up React project.
 2. **Actual Frontend**: Use React components and hooks and build over the underlying logic/structure that Spring/REST created.
-3. **Displaying Data**: We need to obtain the data using either "fetch" HTTP request or using GraphQL.
+3. **Displaying Data**: We need to obtain the data using Apollo client to handle HTTP requests and responses and GraphQL to specify the received data.
 4. **Bonus (but we should really do this)**: Make mobile responsive using Tailwind or Bootstrap.
 5. **Bonus**: Implement user authentication (verify identity) and authorization (determine privileges) around the backend logic.
 
