@@ -26,22 +26,24 @@
 
 We should do integration testing for the frontend.
 
-## Best practices
+## V. Best practices
 
-- Use Version Control (duh); use descriptive commit messages.
-- OOP: Everything should be in a class (for Java and JavaScript).
+- Use Version Control. Have descriptive commit messages.
+- Programming Paradigms:
+    - OOP for Java because of separation of concern.
+    - Functional programming for React.js because of compatibility with React Hooks.
 - Code comments and variable naming (and we need to be consistent!):
     - Comment all classes with a paragraph.
     - Comment all methods with a sentence.
     - Data member names and method names should be as descriptive as possible (longer == better).
 - Documentation: Should probably document APIs in a MD file or something.
 
-## Don't Need
+## VI. Don't Need
 
 - Agile.
 - Unit tests.
 
-## Files
+## VII. Backend Files
 ### API/Presentation Layer (Controllers)
 - TBA
 ### Business Logic/Application Layer (Services)
@@ -79,3 +81,34 @@ We should do integration testing for the frontend.
 - **DeliveryPlan**: This class represents the delivery details for an order.
 - **Supplier**: This class represents a supplier of products.
 - **SupplierItem**: This class represents a product offered by a specific supplier, including the supplier's price for that product.
+
+## VII. Frontend Files
+### Customer User Web Pages
+- **Feature:** Search store for products and look up information about specific products.
+    - **Implementation:** Click "more info" on a specific product listing.
+    - **CRUD:** Read-only.
+- **Feature:** Set up an account.
+    - **Implementation:** Account registration page.
+    - **CRUD:** Create-only. NOTE: should have two buttons, "Sign-in" and "Create account".
+- **Feature:** Change preferences and account details.
+    - **Implementation:** Change address(es), add addresses, change credit card info, add credit cards, etc.
+    - **CRUD:** Update-only.
+- **Feature:** Make payments.
+    - **Implementation:** Payment info screen i.e. adding credit card info OR use preexisting credit card info. Question: How does a customer's "balance" tie into this? Maybe they can use a pre-existing balance OR use a credit card?
+    - **CRUD:** Delete-only.
+### Staff Member User Web Pages
+- **Feature:** Modify products.
+    - **Implementation:** Allow staff members to "search the store for products" just like customers can. NOTE: Reuse query functionality code here. BUT, staff members can ONLY modify the product information such as cost, name of product, etc.
+    - **CRUD:** Update-only (implies read functionality too, that's up to us).
+- **Feature:** Create products.
+    - **Implementation:** Creating products will take you to a screen where you can fill out product information such as cost, name of product, etc.
+    - **CRUD:** Create-only.
+- **Feature:** Update the availability of product in stock.
+    - **Implementation:** DESIGN DECISION: This could be part of the "modify/update products" page. BUT, we'd have to merge in the "Stock" SQL table as being part of the "Product" SQL table. Otherwise, if the tables are separate, the pages should be separate. Should only modify "quantity" column on "Stock" SQL table. NOTE: Reuse query functionality code here.
+    - **CRUD:** Update-only (implies read functionality too, that's up to us). Maybe delete too.
+- **Feature:** Query customer information.
+    - **Implementation:** This should be a separate page. Should be pretty easy to implement, just allow querying customer information.
+    - **CRUD:** Read-only.
+- **Feature:** Process orders.
+    - **Implementation:** Does this mean we have to confirm any orders that the customers make? If this is so, I'm implementing this feature last because it'll be extremely annoying to verify a customer order every time.
+    - **CRUD:** ???
