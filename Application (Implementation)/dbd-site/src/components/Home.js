@@ -16,8 +16,9 @@ const Home = () => {
 
   // Dummy product data (replace with your actual product data)
   const products = [
-    { id: 1, name: "Product A" },
-    { id: 2, name: "Product B" },
+    { id: 1, name: "Product A", description: "This is product A"},
+    { id: 2, name: "Product B", description: "This is product B"},
+    { id: 3, name: "Product C", description: "This is product C"},
     // Add more products...
   ];
 
