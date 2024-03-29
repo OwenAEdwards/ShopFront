@@ -1,20 +1,16 @@
 // ProductList.js
-import React from "react";
-import {Button} from "@nextui-org/react";
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 const ProductList = ({ products, onProductClick }) => {
   return (
     <div>
-      <h2>Product List</h2>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            <Button onClick={() => onProductClick(product)}>
-              {product.name}
-            </Button>
-          </li>
-        ))}
-      </ul>
+    <Stack spacing={2} direction="row">
+      <Button variant="text">Text</Button>
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+    </Stack>
     </div>
   );
 };

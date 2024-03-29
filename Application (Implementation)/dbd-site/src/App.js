@@ -5,10 +5,10 @@ import Home from './components/Home';
 
 const App = () => {
   return (
-    <NextUIProvider>
+    <div>
       <PageRoutes/>
       <Home/>
-    </NextUIProvider>
+    </div>
   );
 };
 

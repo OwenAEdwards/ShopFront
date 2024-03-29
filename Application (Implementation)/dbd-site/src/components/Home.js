@@ -5,6 +5,7 @@ import Cart from "./Cart";
 import ProductDetail from "./ProductDetail";
 import ProductList from "./ProductList";
 import Nav from "./Navbar";
+import ResponsiveAppBar from "./Navbar";
 
 const Home = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -22,7 +23,7 @@ const Home = () => {
 
   return (
     <div>
-      <Nav /> {/* Include the Navbar component */}
+      <ResponsiveAppBar /> {/* Include the Navbar component */}
       <h1>Welcome to Our E-commerce Site</h1>
       <Login />
       <Signup />
