@@ -16,12 +16,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import BrandIcon from '@mui/icons-material/LocalGroceryStore';
 import Login from './Auth/Login';
-import Logout from './Auth/Logout';
 import { Dialog } from '@mui/material';
-
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = [];
 const settings = ['Profile', 'Account', 'Dashboard', 'Login'];
 
 function ResponsiveAppBar() {
@@ -63,7 +61,7 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <BrandIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -118,7 +116,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <BrandIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
