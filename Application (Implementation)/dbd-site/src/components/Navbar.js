@@ -19,19 +19,20 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Login from './Auth/Login';
 import Logout from './Auth/Logout';
-const [showLogin, setShowLogin] = React.useState(false);
-
+import { Dialog } from '@mui/material';
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Login'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [showLogin, setShowLogin] = React.useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -48,16 +49,14 @@ function ResponsiveAppBar() {
     setAnchorElUser(null); // close menu after clicking
 
     // Add logic to handle navigation based on the button clicked
-    
     if (button.target.innerText === 'Login') {
-      // Show the login page
+      // Show the login component
       setShowLogin(true);
-    } 
-    else if (button.target.innerText === 'Logout') {
-      // Show the logout page
-      setShowLogin(true);
-    } 
-  }
+    } else if (button.target.innerText === 'Logout') {
+      // Redirect to the logout page
+      console.log('Logout');
+    }
+  };
 
   return (
     // THE BELOW CODE IS MOBILE ONLY / SMALL SCREENS
@@ -181,6 +180,14 @@ function ResponsiveAppBar() {
           </Box>
         </Toolbar>
       </Container>
+
+      {showLogin && (
+        <>
+        <Dialog open={showLogin} onClose={() => setShowLogin(false)}>
+          <Login />
+        </Dialog>
+        </>
+      )}
     </AppBar>
   );
 }
