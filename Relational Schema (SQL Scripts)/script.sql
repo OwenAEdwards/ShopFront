@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS Products (
     product_name VARCHAR(100) NOT NULL,
     brand VARCHAR(50),
     size VARCHAR(20),
-    description TEXT
+    description TEXT,
     price DECIMAL(10, 2) NOT NULL
 );
 
