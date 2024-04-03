@@ -1,3 +1,8 @@
+// File: Navbar.js
+// This file contains the Navbar component that displays the navigation bar at the top of the page. 
+// It includes links to different pages, a user profile menu, and a responsive menu for small screens.
+// The component also handles navigation logic based on user interactions. All components are rendered conditionally based on the state.
+
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,6 +17,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import Login from './Auth/Login';
+import Logout from './Auth/Logout';
+const [showLogin, setShowLogin] = React.useState(false);
+
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -35,7 +44,23 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const handleNavClick = (button) => {
+    setAnchorElUser(null); // close menu after clicking
+
+    // Add logic to handle navigation based on the button clicked
+    
+    if (button.target.innerText === 'Login') {
+      // Show the login page
+      setShowLogin(true);
+    } 
+    else if (button.target.innerText === 'Logout') {
+      // Show the logout page
+      setShowLogin(true);
+    } 
+  }
+
   return (
+    // THE BELOW CODE IS MOBILE ONLY / SMALL SCREENS
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -44,7 +69,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/index.html"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -148,7 +173,7 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={handleNavClick}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

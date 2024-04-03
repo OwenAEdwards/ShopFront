@@ -5,6 +5,9 @@
 - fingers
 - at least 2 hours of sleep
 
+## Frameworks
+- MaterialUI is being used for the display components
+
 ## Installation
 - cd to dbd-site folder
 - npm install package.json
