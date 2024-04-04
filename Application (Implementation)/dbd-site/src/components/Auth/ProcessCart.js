@@ -1,4 +1,4 @@
-.// ProcessCart.js
+// ProcessCart.js
 // ProcessCart is a page that processes the cart of a user.
 import React from 'react';
 
