@@ -1,14 +1,54 @@
 // ProductDetail.js
+// Handles the specific details of a product and allows the user to add the product to the cart
 import * as React from 'react';
+import Button from '@mui/material/Button';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-const ProductDetail = ({ product }) => {
+// Product Detail Component
+// product: The product object to display details for
+// showCartButton: A blank (undefined) value to indicate whether or not to display the add to cart button
+const ProductDetail = ({ product, showCartButton }) => {
+
+  const [cartButton, setCartButton] = React.useState(undefined);
+ 
+  // Function to handle adding (or removing product) to the cart
+  const handleAddToCart = (product) => { 
+    // Add / Remove the product to the cart
+    // Update the product to indicate it is in the cart
+    if (product.inCart === true){
+      console.log('Product removed from cart:', product);
+      product.inCart = false;
+      setCartButton(!cartButton);
+    }else{
+      console.log('Product added to cart:', product);
+      product.inCart = true;
+      setCartButton(true);
+    }
+  }
+
+  // Set the cart button based on the product's inCart status initially 
+  React.useEffect(() => {
+    setCartButton(product.inCart);
+  }, []);
+
+  // Return the product details component
   return (
     <div>
+      {/* Add any details you want to display in the popup*/}
       <h2>{product.name}</h2>
       <p>Description: {product.description}</p>
       <p>Price: ${product.price}</p>
-      <p>Long Description: {product.longdescription}</p>
-      {/* Add any other details you want to display */}
+
+      {/* Added to cart button */}
+      
+      
+      {cartButton && showCartButton===undefined && (
+        <Button variant="outlined" onClick={() => { handleAddToCart(product) }}>Remove from Cart</Button>
+      )}
+      {/* Add to cart button */}
+      {!cartButton && showCartButton===undefined && (
+        <Button variant="contained" endIcon={<AddCircleOutlineIcon/>} onClick={() => { handleAddToCart(product) }}>Add to Cart</Button>
+      )}
     </div>
   );
 };

@@ -2,8 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
-import ProductList from './components/ProductList';
-import ProductDetail from './components/ProductDetail';
+import ProductDetail from './components/ProductList';
 import Cart from './components/Cart';
 import Login from './components/Auth/Login';
 
@@ -12,8 +11,7 @@ const PageRoutes = () => {
     <Router>
       <Routes>
         <Route exact path="/" component={Home} />
-        <Route path="/products" component={ProductList} />
-        <Route path="/product/:id" component={ProductDetail} />
+        <Route path="/product/" component={ProductDetail} />
         <Route path="/cart" component={Cart} />
         <Route path="/login" element={Login} />
         {/* Add more routes as needed */}

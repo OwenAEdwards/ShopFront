@@ -2,6 +2,7 @@
 // This file contains the Navbar component that displays the navigation bar at the top of the page. 
 // It includes links to different pages, a user profile menu, and a responsive menu for small screens.
 // The component also handles navigation logic based on user interactions. All components are rendered conditionally based on the state.
+// See bottom of file for the conditional rendering of each component.
 
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
@@ -19,15 +20,17 @@ import MenuItem from '@mui/material/MenuItem';
 import BrandIcon from '@mui/icons-material/LocalGroceryStore';
 import Login from './Auth/Login';
 import { Dialog } from '@mui/material';
+import Cart from './Cart';
 
 // List of pages and settings
-const pages = [];
+const pages = ['About Us'];
 const settings = ['Cart', 'Login'];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar(products) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [showLogin, setShowLogin] = React.useState(false);
+  const [showCart, setShowCart] = React.useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -59,7 +62,7 @@ function ResponsiveAppBar() {
       console.log('Logout');
     } else if (selectedButton === 'Cart') {
       // Redirect to the cart page
-      console.log('Cart');
+      setShowCart(true);
     }
   };
 
@@ -185,6 +188,15 @@ function ResponsiveAppBar() {
           </Box>
         </Toolbar>
       </Container>
+
+      {/* Add Cart and Login components here */}
+      {showCart && (
+        <>
+        <Dialog open={showCart} onClose={() => setShowCart(false)}>
+          <Cart products={products}/>
+        </Dialog>
+        </>
+      )}
 
       {showLogin && (
         <>
