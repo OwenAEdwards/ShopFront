@@ -46,7 +46,9 @@ CREATE TABLE IF NOT EXISTS Addresses (
 CREATE TABLE IF NOT EXISTS CreditCards (
     card_id SERIAL PRIMARY KEY,
     card_number VARCHAR(20) NOT NULL,
-    expiration_date DATE NOT NULL
+    expiration_date DATE NOT NULL,
+	address_id SERIAL NOT NULL,
+	FOREIGN KEY (address_id) REFERENCES Addresses(address_id)
 );
 
 CREATE TABLE IF NOT EXISTS Customers (
