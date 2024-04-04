@@ -19,8 +19,10 @@ import MenuItem from '@mui/material/MenuItem';
 import BrandIcon from '@mui/icons-material/LocalGroceryStore';
 import Login from './Auth/Login';
 import { Dialog } from '@mui/material';
+
+// List of pages and settings
 const pages = [];
-const settings = ['Profile', 'Account', 'Dashboard', 'Login'];
+const settings = ['Cart', 'Login'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -46,13 +48,18 @@ function ResponsiveAppBar() {
   const handleNavClick = (button) => {
     setAnchorElUser(null); // close menu after clicking
 
+    var selectedButton = button.target.innerText;
+
     // Add logic to handle navigation based on the button clicked
-    if (button.target.innerText === 'Login') {
+    if (selectedButton === 'Login') {
       // Show the login component
       setShowLogin(true);
-    } else if (button.target.innerText === 'Logout') {
+    } else if (selectedButton === 'Logout') {
       // Redirect to the logout page
       console.log('Logout');
+    } else if (selectedButton === 'Cart') {
+      // Redirect to the cart page
+      console.log('Cart');
     }
   };
 
