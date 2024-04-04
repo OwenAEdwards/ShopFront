@@ -47,14 +47,13 @@ We should do integration testing for the frontend.
 ### API/Presentation Layer (Controllers)
 - TBA
 ### Business Logic/Application Layer (Services)
-- **UserService**: This class implements business logic related to users, such as registration, login, and profile management.
+- **UserService**: This class implements business logic related to users, such as registration, login, and profile management. NOTE: might need to remove later.
 - **CustomerService**: This class implements business logic related to customers, such as adding and managing addresses, credit cards, and orders.
 - **StaffMemberService**: This class implements business logic related to staff members, such as creating and managing products, processing orders, and viewing customer information.
 - **ProductService**: This class implements business logic related to products, such as searching, adding, and updating product information.
 - **OrderService**: This class implements business logic related to orders, such as placing, processing, and tracking orders.
 - **DeliveryPlanService**: This class implements business logic related to delivery plans, such as calculating delivery costs and scheduling deliveries.
 ### Data Access Layer (Repositories)
-- **UserRepository**: This interface defines methods for interacting with User data.
 - **CustomerRepository**: This interface defines methods for interacting with Customer data.
 - **StaffMemberRepository**: This interface defines methods for interacting with StaffMember data.
 - **AddressRepository**: This interface defines methods for interacting with Address data.
@@ -69,8 +68,8 @@ We should do integration testing for the frontend.
 - **SupplierItemRepository**: This interface defines methods for interacting with SupplierItem data.
 ### Entities
 - **User**: This class represents a user, either a customer or a staff member.
-- **Customer**: This class inherits from `User` and contain customer-specific information, such as addresses, credit cards, and balance.
-- **StaffMember**: This class inherits from `User` and contain staff member-specific information, such as salary and job title.
+- **Customer**: This class contains customer-specific information, such as customer ID, name, addresses, credit cards, and balance.
+- **StaffMember**: This class contains staff member-specific information, such as staff member ID, name, addresses, salary and job title.
 - **Address**: This class represents an address, either for delivery or payment.
 - **CreditCard**: This class represents a credit card associated with a customer.
 - **Product**: This class represent a product in the store.
