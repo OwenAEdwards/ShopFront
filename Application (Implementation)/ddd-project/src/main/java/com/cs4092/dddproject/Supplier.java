@@ -1,11 +1,6 @@
 package com.cs4092.dddproject;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,17 +18,17 @@ public class Supplier {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long supplierId;
 
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
     @Column(nullable = false)
     @NotEmpty
     private String name;
 
     @Column
-    @NotEmpty
-    private String address;
-
-    @Column
     private String contactInformation;
 
-    @OneToMany(mappedBy = "supplier")
+    @OneToMany(mappedBy = "supplierItem")
     private List<SupplierItem> supplierItems;
 }

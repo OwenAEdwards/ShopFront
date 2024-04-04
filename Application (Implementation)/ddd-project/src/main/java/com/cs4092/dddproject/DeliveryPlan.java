@@ -1,10 +1,6 @@
 package com.cs4092.dddproject;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -38,5 +34,7 @@ public class DeliveryPlan {
     @Column(nullable = false)
     private LocalDate shipDate;
 
-
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 }

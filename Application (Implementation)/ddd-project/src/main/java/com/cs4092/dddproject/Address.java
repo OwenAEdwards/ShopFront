@@ -1,12 +1,6 @@
 package com.cs4092.dddproject;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,8 +17,20 @@ public class Address {
     private Long addressId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false) // Foreign key
-    private User user;
+    @JoinColumn(name = "customer_id") // Foreign key
+    private Customer customer;
+
+    @OneToOne
+    @JoinColumn(name = "staff_id") // Foreign key
+    private StaffMember staffMember;
+
+    @OneToOne
+    @JoinColumn(name = "warehouse_id") // Foreign key
+    private Warehouse warehouse;
+
+    @OneToOne
+    @JoinColumn(name = "supplier_id") // Foreign key
+    private Supplier supplier;
 
     @Column(nullable = false)
     @NotEmpty

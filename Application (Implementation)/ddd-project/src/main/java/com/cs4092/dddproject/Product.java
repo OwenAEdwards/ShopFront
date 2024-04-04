@@ -51,4 +51,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<Stock> stock;
+
+    @OneToMany(mappedBy = "supplierItem")
+    private List<SupplierItem> supplierItem;
 }

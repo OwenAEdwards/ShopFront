@@ -1,12 +1,6 @@
 package com.cs4092.dddproject;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,12 +20,20 @@ public class CreditCard {
     private Long creditCardId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false) // Foreign key
-    private User user;
+    @JoinColumn(name = "customer_id", nullable = false) // Foreign key
+    private Customer customer;
 
     @Column(nullable = false)
     @NotEmpty
     private String cardNumber;
+
+    @OneToOne
+    @JoinColumn(name = "card_id") // Foreign key
+    private Order order;
+
+    @OneToOne
+    @JoinColumn(name = "address_id") // Foreign key
+    private Address address;
 
     @Column(nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) // For proper serialization
