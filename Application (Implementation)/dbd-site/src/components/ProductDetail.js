@@ -36,12 +36,15 @@ const ProductDetail = ({ product, showCartButton }) => {
     <div>
       {/* Add any details you want to display in the popup*/}
       <h2>{product.name}</h2>
-      <p>Description: {product.description}</p>
+      <p><u>Description: </u> <br/> {product.longdescription}</p>
       <p>Price: ${product.price}</p>
 
+      <img src={product.image} alt={" "} style={{ width: '100px', height: '100px' }} />
+      
       {/* Added to cart button */}
       
-      
+      <br/>
+      <br/> 
       {cartButton && showCartButton===undefined && (
         <Button variant="outlined" onClick={() => { handleAddToCart(product) }}>Remove from Cart</Button>
       )}
