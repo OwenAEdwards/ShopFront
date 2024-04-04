@@ -1,11 +1,13 @@
+// Handles display and opening of the product detail dialog
+
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import AppCard from './AppCard';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import ProductDetail from './ProductDetail';
 
-const ProductList = ({ products, onProductClick }) => {
+const ProductList = ({ products, onProductClick, showCartButton }) => {
   const [open, setOpen] = React.useState(false);
   const [selectedProduct, setSelectedProduct] = React.useState(null);
 
@@ -26,13 +28,11 @@ const ProductList = ({ products, onProductClick }) => {
         ))}
       </Stack>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{selectedProduct && selectedProduct.name}</DialogTitle>
         <DialogContent>
           {selectedProduct && (
             <div>
-              <p>Description: {selectedProduct.longdescription}</p>
-              <p>Price: ${selectedProduct.price}</p>
-              {/* Add more details as needed */}
+              {/* Display the product details in the dialog, pass in selectedProduct */}
+              <ProductDetail product={selectedProduct} showCartButton={showCartButton}/>
             </div>
           )}
         </DialogContent>
