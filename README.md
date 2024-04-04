@@ -67,7 +67,6 @@ We should do integration testing for the frontend.
 - **SupplierRepository**: This interface defines methods for interacting with Supplier data.
 - **SupplierItemRepository**: This interface defines methods for interacting with SupplierItem data.
 ### Entities
-- **User**: This class represents a user, either a customer or a staff member.
 - **Customer**: This class contains customer-specific information, such as customer ID, name, addresses, credit cards, and balance.
 - **StaffMember**: This class contains staff member-specific information, such as staff member ID, name, addresses, salary and job title.
 - **Address**: This class represents an address, either for delivery or payment.
