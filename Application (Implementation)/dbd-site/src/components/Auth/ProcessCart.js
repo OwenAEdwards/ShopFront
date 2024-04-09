@@ -2,10 +2,11 @@
 // ProcessCart is a page that processes the cart of a user.
 import React from 'react';
 import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 import MakePayments from './MakePayments';
 
-
-const ProcessCart = () => {
+const ProcessCart = (products) => {
     console.log('Processing cart');
     return (
     <div>

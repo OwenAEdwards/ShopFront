@@ -6,9 +6,13 @@ import Item from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import ProductList from './ProductList';
 import ProcessCart from './Auth/ProcessCart';
+import Dialog from '@mui/material/Dialog';
 import { useState } from 'react';
 
 const Cart = (products, isLoggedIn) => {
+
+    const [showProcessCart, setShowProcessCart] = React.useState(false);
+
     //dereference each object here till array of products
     products = products.products.products;
 
@@ -19,16 +23,13 @@ const Cart = (products, isLoggedIn) => {
     }
 
     // Handle display and opening of the product detail dialog
-    const [selectedProduct, setSelectedProduct] = useState(null);
     const handleProductClick = (product) => {
-    setSelectedProduct(product);
+        setSelectedProduct(product);
     };
 
-    // Handle purchase
     const handlePurchase = () => {
-        ProcessCart();
-        alert('Purchase successful');
-    };
+        setShowProcessCart(true);
+    }
 
     // return component here
     return (
@@ -61,11 +62,15 @@ const Cart = (products, isLoggedIn) => {
                 {isLoggedIn && filterProducts(products).length !== 0 && (
                     <Grid item xs={4}>
                         <Item>
-                            <button onClick={handlePurchase}>Purchase</button>
+                            <button onClick={handlePurchase()}>Purchase</button>
                         </Item>
                     </Grid>
                 )}
             </Grid>
+            {showProcessCart && (
+                <ProcessCart products={filterProducts(products)} />
+
+            )}
         </Box>
     );
 }
