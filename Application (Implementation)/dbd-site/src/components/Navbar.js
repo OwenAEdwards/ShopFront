@@ -19,12 +19,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import BrandIcon from '@mui/icons-material/LocalGroceryStore';
 import Login from './Auth/Login';
+import Logout from './Auth/Logout';
 import { Dialog } from '@mui/material';
 import Cart from './Cart';
-
-// List of pages and settings
-const pages = ['About Us'];
-const settings = ['Cart', 'Login'];
 
 function ResponsiveAppBar(products) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -48,6 +45,29 @@ function ResponsiveAppBar(products) {
     setAnchorElUser(null);
   };
 
+  function checkCookie() {
+    const isLoggedIn = document.cookie.includes('loggedIn=true');
+    var loggedIn = false;
+    if (isLoggedIn) {
+      var loggedIn = true;
+    } else {
+      loggedIn = false;
+    };
+    console.log('loggedIn:', loggedIn)
+    return loggedIn;
+  }
+  
+  // List of settings
+  const settings = ['Cart'];
+  const pages = ['About Us'];
+
+  // Menu items based on logged in status
+  if (checkCookie() == true) {
+    settings.push('Logout');
+  } else { 
+    settings.push('Login');
+  }
+
   const handleNavClick = (button) => {
     setAnchorElUser(null); // close menu after clicking
 
@@ -58,14 +78,15 @@ function ResponsiveAppBar(products) {
       // Show the login component
       setShowLogin(true);
     } else if (selectedButton === 'Logout') {
-      // Redirect to the logout page
-      console.log('Logout');
+      // Show the logout component
+      setShowLogin(true);
     } else if (selectedButton === 'Cart') {
       // Redirect to the cart page
       setShowCart(true);
     }
   };
 
+  // return the responsive app bar
   return (
     // THE BELOW CODE IS MOBILE ONLY / SMALL SCREENS
     <AppBar position="static">
@@ -189,20 +210,20 @@ function ResponsiveAppBar(products) {
         </Toolbar>
       </Container>
 
-      {/* Add Cart and Login components here */}
-      {showCart && (
-        <>
-        <Dialog open={showCart} onClose={() => setShowCart(false)}>
-          <Cart products={products}/>
-        </Dialog>
-        </>
-      )}
-
+      {/* Show login component */}
       {showLogin && (
         <>
-        <Dialog open={showLogin} onClose={() => setShowLogin(false)}>
-          <Login />
-        </Dialog>
+          <Dialog open={showLogin} onClose={() => setShowLogin(false)}>
+            {checkCookie() ? <Logout /> : <Login />}
+          </Dialog>
+        </>
+      )}
+      {/* Show cart component */}
+      {showCart && (
+        <>
+          <Dialog open={showCart} onClose={() => setShowCart(false)}>
+            <Cart products={products} isLoggedIn={checkCookie()} />
+          </Dialog>
         </>
       )}
     </AppBar>

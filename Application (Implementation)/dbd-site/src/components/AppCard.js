@@ -5,17 +5,27 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 const AppCard = ({ product, onClick }) => {
+  const handleMouseEnter = () => {
+    // add future mouse over logic here
+  };
+
+  const handleMouseLeave = () => {
+    // add future mouse leave logic here
+  }
+
   return (
-    <Card variant="outlined" onClick={() => onClick(product)}>
-      <CardContent>
-        <Typography variant="h5" component="div">
-          {product.name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {product.description}
-        </Typography>
-      </CardContent>
-    </Card>
+    <div className="card-container" onMouseEnter={() => handleMouseEnter()} onMouseLeave={() => handleMouseLeave()}>
+      <Card variant="outlined" onClick={() => onClick(product)}>
+        <CardContent>
+          <Typography variant="h5" component="div">
+            {product.name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {product.description}
+          </Typography>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
