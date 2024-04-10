@@ -4,6 +4,7 @@ import ProductDetail from "./ProductList";
 import ProductList from "./ProductList";
 import ResponsiveAppBar from "./Navbar";
 import Container from '@mui/material/Container';
+import { Grid } from '@mui/material';
 
 const theme = createTheme({
   typography: {
@@ -52,14 +53,20 @@ const Home = () => {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <ResponsiveAppBar products={products}/> {/* Include the Navbar component */}
+        <ResponsiveAppBar products={products} /> {/* Include the Navbar component */}
         <h1>Welcome to Our E-commerce Site</h1>
-        
-        <Container maxWidth="lg" style={{ overflowX: "hidden" }}> {/* Wrap the content in a Container component and set overflowX to "hidden" */}
-          <div className="product-list-wrapper">
-            <ProductList products={products} onProductClick={handleProductClick} />
-            {selectedProduct && <ProductDetail product={selectedProduct} />}
-          </div>
+
+        <Container maxWidth="lg"> {/* Wrap the content in a Container component */}
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <div className="product-list-wrapper" style={{ overflowWrap: 'break-word' }}>
+                <ProductList products={products} onProductClick={handleProductClick} />
+              </div>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              {selectedProduct && <ProductDetail product={selectedProduct} />}
+            </Grid>
+          </Grid>
         </Container>
       </div>
     </ThemeProvider>
