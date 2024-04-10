@@ -13,10 +13,10 @@ const ProcessCart = (products) => {
         <Card variant="outlined">
             <CardContent>
             <Typography variant="h5" component="div">
-                <h1>Cart</h1>
+                <h1>Payment</h1>
             </Typography>
             <Typography variant="body2" color="text.secondary">
-                <MakePayments />
+                <MakePayments products={products} />
             </Typography>
         </CardContent>
       </Card>

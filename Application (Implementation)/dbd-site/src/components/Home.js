@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ProductDetail from "./ProductList";
 import ProductList from "./ProductList";
 import ResponsiveAppBar from "./Navbar";
+import Container from '@mui/material/Container';
 
 const theme = createTheme({
   typography: {
@@ -27,6 +28,24 @@ const Home = () => {
     inCart: false, 
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fphotos%2Fnerd-student-making-a-funny-smiling-face-picture-id156303400%3Fk%3D6%26m%3D156303400%26s%3D612x612%26w%3D0%26h%3DO5qvTA5strYKjTkF8e0GjnEpOZ6Tk48t829ST3tjxCU%3D&f=1&nofb=1&ipt=90af06ac5f35dcf4f239ad25eede2da985cf2e4c036013fc7eec3832ce2a924f&ipo=images"},
     { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+
     // Add more products...
   ];
 
@@ -35,9 +54,13 @@ const Home = () => {
       <div>
         <ResponsiveAppBar products={products}/> {/* Include the Navbar component */}
         <h1>Welcome to Our E-commerce Site</h1>
-
-        <ProductList products={products} onProductClick={handleProductClick} />
-        {selectedProduct && <ProductDetail product={selectedProduct} />}
+        
+        <Container maxWidth="lg" style={{ overflowX: "hidden" }}> {/* Wrap the content in a Container component and set overflowX to "hidden" */}
+          <div className="product-list-wrapper">
+            <ProductList products={products} onProductClick={handleProductClick} />
+            {selectedProduct && <ProductDetail product={selectedProduct} />}
+          </div>
+        </Container>
       </div>
     </ThemeProvider>
   );

@@ -6,8 +6,6 @@ import Item from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import ProductList from './ProductList';
 import ProcessCart from './Auth/ProcessCart';
-import Dialog from '@mui/material/Dialog';
-import { useState } from 'react';
 
 const Cart = (products, isLoggedIn) => {
 
@@ -62,14 +60,13 @@ const Cart = (products, isLoggedIn) => {
                 {isLoggedIn && filterProducts(products).length !== 0 && (
                     <Grid item xs={4}>
                         <Item>
-                            <button onClick={handlePurchase()}>Purchase</button>
+                            <button onClick={handlePurchase}>Purchase</button>
                         </Item>
                     </Grid>
                 )}
             </Grid>
             {showProcessCart && (
                 <ProcessCart products={filterProducts(products)} />
-
             )}
         </Box>
     );
