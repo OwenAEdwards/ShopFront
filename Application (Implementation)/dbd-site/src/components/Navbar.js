@@ -22,6 +22,7 @@ import Login from './Auth/Login';
 import Logout from './Auth/Logout';
 import { Dialog } from '@mui/material';
 import Cart from './Cart';
+import Searchbar from './Searchbar';
 
 function ResponsiveAppBar(products) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -178,6 +179,15 @@ function ResponsiveAppBar(products) {
             ))}
           </Box>
 
+          {/* Show the search bar */}
+          <Box sx={{ flexGrow: 0, ml: 2 }}>
+            <Searchbar/>
+          </Box> 
+
+          {/* Add blank space */}
+          <Box sx={{ flexGrow: 0, width: '16px' }}></Box>
+
+          {/* Show the user menu */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

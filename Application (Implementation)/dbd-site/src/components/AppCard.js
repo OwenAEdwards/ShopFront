@@ -3,10 +3,11 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import Zoom from '@mui/material/Zoom';
 
 const AppCard = ({ product, onClick }) => {
   const handleMouseEnter = () => {
-    // add future mouse over logic here
+    // add future mouse enter logic here
   };
 
   const handleMouseLeave = () => {

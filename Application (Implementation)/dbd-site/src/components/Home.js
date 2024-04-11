@@ -46,6 +46,38 @@ const Home = () => {
     { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
     { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
     { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
+    { id: 3, name: "Product C", description: "This is product C", price: 30, longdescription: "This is a long description for product C", inCart: false},
 
     // Add more products...
   ];
@@ -54,15 +86,20 @@ const Home = () => {
     <ThemeProvider theme={theme}>
       <div>
         <ResponsiveAppBar products={products} /> {/* Include the Navbar component */}
+        
         <h1>Welcome to Our E-commerce Site</h1>
+        <p>Click on a product to view more details</p>
+        <br />
 
-        <Container maxWidth="lg"> {/* Wrap the content in a Container component */}
+        <Container maxWidth="page" > {/* Wrap the content in a Container component */}
           <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
-              <div className="product-list-wrapper" style={{ overflowWrap: 'break-word' }}>
-                <ProductList products={products} onProductClick={handleProductClick} />
-              </div>
-            </Grid>
+            {products.map((product) => (
+              <Grid item xs={12} md={2} key={product.id}>
+                <div className="product-list-wrapper" style={{ overflowWrap: 'break-word' }}>
+                  <ProductList products={[product]} onProductClick={handleProductClick} />
+                </div>
+              </Grid>
+            ))}
             <Grid item xs={12} md={6}>
               {selectedProduct && <ProductDetail product={selectedProduct} />}
             </Grid>
