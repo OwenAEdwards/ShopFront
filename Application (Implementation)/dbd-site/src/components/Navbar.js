@@ -23,12 +23,14 @@ import Logout from './Auth/Logout';
 import { Dialog } from '@mui/material';
 import Cart from './Cart';
 import Searchbar from './Searchbar';
+import AddProduct from './AdminTools';
 
 function ResponsiveAppBar(products) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [showLogin, setShowLogin] = React.useState(false);
   const [showCart, setShowCart] = React.useState(false);
+  const [showAuth, setShowAuth] = React.useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -57,6 +59,16 @@ function ResponsiveAppBar(products) {
     console.log('loggedIn:', loggedIn)
     return loggedIn;
   }
+
+  function checkAuth() {
+    if (checkCookie() == true) {
+      if (document.cookie.includes('userType=admin')) {
+        return 'Admin';
+      } else {
+        return 'User';
+      }
+    }
+  }
   
   // List of settings
   const settings = ['Cart'];
@@ -67,6 +79,11 @@ function ResponsiveAppBar(products) {
     settings.push('Logout');
   } else { 
     settings.push('Login');
+  }
+
+  // Check if user is admin
+  if (checkAuth() == 'Admin') {
+    pages.push('Admin Tools');
   }
 
   const handleNavClick = (button) => {
@@ -84,6 +101,20 @@ function ResponsiveAppBar(products) {
     } else if (selectedButton === 'Cart') {
       // Redirect to the cart page
       setShowCart(true);
+    }
+  };
+
+  const handleSettingsClick = (button) => {
+    setAnchorElUser(null); // close menu after clicking
+
+    var selectedButton = button.target.innerText;
+
+    console.log('selectedButton:', selectedButton);
+
+    // Add logic to handle navigation based on the button clicked
+    if (selectedButton === 'ADMIN TOOLS') {
+      // Show the admin tools component
+      setShowAuth(true);
     }
   };
 
@@ -171,7 +202,7 @@ function ResponsiveAppBar(products) {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={handleSettingsClick}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -233,6 +264,14 @@ function ResponsiveAppBar(products) {
         <>
           <Dialog open={showCart} onClose={() => setShowCart(false)}>
             <Cart products={products} isLoggedIn={checkCookie()} />
+          </Dialog>
+        </>
+      )}
+      {/* Show the admin tools */}
+      {showAuth && (
+        <>
+          <Dialog open={showAuth} onClose={() => setShowAuth(false)}>
+            <AddProduct />
           </Dialog>
         </>
       )}
