@@ -24,6 +24,7 @@ import { Dialog } from '@mui/material';
 import Cart from './Cart';
 import Searchbar from './Searchbar';
 import AddProduct from './AdminTools';
+import { checkCookie, checkAuth } from './Helpers/auth';
 
 function ResponsiveAppBar(products) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -48,28 +49,6 @@ function ResponsiveAppBar(products) {
     setAnchorElUser(null);
   };
 
-  function checkCookie() {
-    const isLoggedIn = document.cookie.includes('loggedIn=true');
-    var loggedIn = false;
-    if (isLoggedIn) {
-      var loggedIn = true;
-    } else {
-      loggedIn = false;
-    };
-    console.log('loggedIn:', loggedIn)
-    return loggedIn;
-  }
-
-  function checkAuth() {
-    if (checkCookie() == true) {
-      if (document.cookie.includes('userType=admin')) {
-        return 'Admin';
-      } else {
-        return 'User';
-      }
-    }
-  }
-  
   // List of settings
   const settings = ['Cart'];
   const pages = ['About Us'];
@@ -279,3 +258,5 @@ function ResponsiveAppBar(products) {
   );
 }
 export default ResponsiveAppBar;
+export { checkCookie, checkAuth };
+
