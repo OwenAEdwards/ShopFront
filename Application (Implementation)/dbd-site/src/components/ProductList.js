@@ -1,5 +1,3 @@
-// Handles display and opening of the product detail dialog
-
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import AppCard from './AppCard';
@@ -23,8 +21,12 @@ const ProductList = ({ products, onProductClick, showCartButton }) => {
   return (
     <div>
       <Stack spacing={2} direction="row">
-        {products.map((product, index) => (
-          <AppCard key={index} product={product} onClick={() => handleOpen(product)} />
+        {products.map((product) => (
+          <AppCard
+            key={product.id} // Use a unique identifier as the key (assuming 'id' exists on product)
+            product={product}
+            onClick={() => handleOpen(product)}
+          />
         ))}
       </Stack>
       <Dialog open={open} onClose={handleClose}>
@@ -32,7 +34,7 @@ const ProductList = ({ products, onProductClick, showCartButton }) => {
           {selectedProduct && (
             <div>
               {/* Display the product details in the dialog, pass in selectedProduct */}
-              <ProductDetail product={selectedProduct} showCartButton={showCartButton}/>
+              <ProductDetail product={selectedProduct} showCartButton={showCartButton} />
             </div>
           )}
         </DialogContent>

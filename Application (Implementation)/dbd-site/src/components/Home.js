@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ProductDetail from "./ProductList";
+import ProductDetail from "./ProductDetail"; // Assuming this is the correct import for ProductDetail
 import ProductList from "./ProductList";
 import ResponsiveAppBar from "./Navbar";
 import Container from '@mui/material/Container';
 import { Grid } from '@mui/material';
-import {productsData} from "./Objects/productsData.objects";
-
-// set as global variable
-var products = productsData;
+import { productsData } from "./Objects/productsData.objects";
 
 const theme = createTheme({
   typography: {
@@ -16,39 +13,34 @@ const theme = createTheme({
   },
 });
 
-var handleAddProduct = () => {};
-
 const Home = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
-  
-  function handleProductClick(product){
+  const [products, setProducts] = useState(productsData); // Initialize products with productsData
+
+  function handleProductClick(product) {
     setSelectedProduct(product);
-  };
+  }
 
-
-
-  const [productList, setProductList] = useState(products);
-
-  handleAddProduct = (newProduct) => {
-    setProductList([...productList, newProduct]);
-    console.log("Product list:", products)
-  };
-
+  // useEffect to update productList whenever products change
+  useEffect(() => {
+    setProducts(productsData); // Update products with the latest data from productsData
+  }, [productsData]);
 
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <ResponsiveAppBar products={productList} /> {/* Include the Navbar component */}
+        <ResponsiveAppBar /> {/* Include the Navbar component */}
         
         <h1>Welcome to Our E-commerce Site</h1>
         <p>Click on a product to view more details</p>
         <br />
 
-        <Container maxWidth="page" > {/* Wrap the content in a Container component */}
+        <Container maxWidth="lg"> {/* Wrap the content in a Container component */}
           <Grid container spacing={2}>
-            {productList.map((product) => (
+            {products.map((product) => (
               <Grid item xs={12} md={2} key={product.id}>
                 <div className="product-list-wrapper" style={{ overflowWrap: 'break-word' }}>
+                  {/* Include the ProductList component */}
                   <ProductList products={[product]} onProductClick={handleProductClick} />
                 </div>
               </Grid>
@@ -64,4 +56,3 @@ const Home = () => {
 };
 
 export default Home;
-export { handleAddProduct };
