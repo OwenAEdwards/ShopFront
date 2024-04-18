@@ -25,8 +25,9 @@ import Cart from './Cart';
 import Searchbar from './Searchbar';
 import AddProduct from './AdminTools';
 import { checkCookie, checkAuth } from './Helpers/auth';
+import {productsData} from './Objects/productsData.objects';
 
-function ResponsiveAppBar(products) {
+function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [showLogin, setShowLogin] = React.useState(false);
@@ -49,9 +50,11 @@ function ResponsiveAppBar(products) {
     setAnchorElUser(null);
   };
 
+  var products = productsData;
+
   // List of settings
   const settings = ['Cart'];
-  const pages = ['About Us'];
+  const pages = ['About'];
 
   // Menu items based on logged in status
   if (checkCookie() == true) {
@@ -242,7 +245,7 @@ function ResponsiveAppBar(products) {
       {showCart && (
         <>
           <Dialog open={showCart} onClose={() => setShowCart(false)}>
-            <Cart products={products} isLoggedIn={checkCookie()} />
+            <Cart />
           </Dialog>
         </>
       )}

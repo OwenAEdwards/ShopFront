@@ -2,7 +2,7 @@ import AddIcon from '@mui/icons-material/Add';
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { Grid } from '@mui/material';
-import { products, handleAddProduct } from './Home';
+import { handleAddProduct } from './Home';
 import ProductDetail from './ProductDetail';
 import ProductListEdit from './ProductList';
 import Container from '@mui/material/Container';

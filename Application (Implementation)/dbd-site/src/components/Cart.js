@@ -7,13 +7,14 @@ import Box from '@mui/material/Box';
 import ProductList from './ProductList';
 import ProcessCart from './Auth/ProcessCart';
 import { checkCookie } from './Helpers/auth';
+import { productsData } from './Objects/productsData.objects';
 
-const Cart = (products) => {
+const Cart = () => {
 
     const [showProcessCart, setShowProcessCart] = React.useState(false);
 
     //dereference each object here till array of products
-    products = products.products.products;
+    var products = productsData;
 
     var isLoggedIn = checkCookie();
 

@@ -27,6 +27,13 @@ const Login = () => {
             document.cookie = 'loggedIn=true; path=/'; // Modify the cookie name and path as needed
             document.cookie = 'userType=admin; path=/'; // Modify the cookie name and path as needed
             // Redirect to the dashboard or perform any other action
+        } else if (username === 'user' && password === 'password' && userType === 'user') {
+            // Successful login
+            alert('Login successful');
+            // Set a cookie to indicate that the user is logged in
+            document.cookie = 'loggedIn=true; path=/'; // Modify the cookie name and path as needed
+            document.cookie = 'userType=user; path=/'; // Modify the cookie name and path as needed
+            // Redirect to the dashboard or perform any other action
         } else {
             // Invalid credentials
             return alert('Invalid username or password');
