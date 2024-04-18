@@ -78,7 +78,7 @@ const AdminTools = () => {
                         <Grid item xs={12} md={4} key={product.id}>
                             <div className="product-list-wrapper" style={{ overflowWrap: 'break-word' }}>
                             {/* Include the ProductList component */}
-                            <ProductList products={[product]} onProductClick={handleProductClick} />
+                            <ProductList showCartButton={false} products={[product]} onProductClick={handleProductClick} />
                             </div>
                         </Grid>
                         ))}

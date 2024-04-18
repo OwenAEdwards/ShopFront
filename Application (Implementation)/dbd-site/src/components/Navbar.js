@@ -23,7 +23,7 @@ import Logout from './Auth/Logout';
 import { Dialog } from '@mui/material';
 import Cart from './Cart';
 import Searchbar from './Searchbar';
-import AddProduct from './AdminTools';
+import AdminTools from './AdminTools';
 import { checkCookie, checkAuth } from './Helpers/auth';
 import {productsData} from './Objects/productsData.objects';
 
@@ -33,6 +33,7 @@ function ResponsiveAppBar() {
   const [showLogin, setShowLogin] = React.useState(false);
   const [showCart, setShowCart] = React.useState(false);
   const [showAuth, setShowAuth] = React.useState(false);
+  const [showAbout, setShowAbout] = React.useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -97,6 +98,9 @@ function ResponsiveAppBar() {
     if (selectedButton === 'ADMIN TOOLS') {
       // Show the admin tools component
       setShowAuth(true);
+    } else if (selectedButton === 'ABOUT') {
+      // Show the about component
+      setShowAbout(true);
     }
   };
 
@@ -253,9 +257,22 @@ function ResponsiveAppBar() {
       {showAuth && (
         <>
           <Dialog open={showAuth} onClose={() => setShowAuth(false)}>
-            <AddProduct />
+            <AdminTools />
           </Dialog>
         </>
+      )}
+      {showAbout && (
+        <Dialog open={showAbout} onClose={() => setShowAbout(false)}>
+          <Typography variant="h6" align="center">
+            About
+          </Typography>
+          <Typography variant="body1" align="center">
+            This is a simple eCommerce application built using React and Material-UI.
+          </Typography>
+          <Typography variant="body1" align="center">
+            Created by Elias Weitfle, Owen Edwards, and Christian Graber
+          </Typography>
+        </Dialog>
       )}
     </AppBar>
   );

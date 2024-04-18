@@ -35,7 +35,7 @@ const Home = () => {
         <p>Click on a product to view more details</p>
         <br />
 
-        <Container maxWidth="lg"> {/* Wrap the content in a Container component */}
+        <Container maxWidth="page"> {/* Wrap the content in a Container component */}
           <Grid container spacing={2}>
             {products.map((product) => (
               <Grid item xs={12} md={2} key={product.id}>
