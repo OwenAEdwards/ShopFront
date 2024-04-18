@@ -6,15 +6,19 @@ import Item from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import ProductList from './ProductList';
 import ProcessCart from './Auth/ProcessCart';
+import { checkCookie } from './Helpers/auth';
+import { productsData } from './Objects/productsData.objects';
 
-const Cart = (products, isLoggedIn) => {
+const Cart = () => {
 
     const [showProcessCart, setShowProcessCart] = React.useState(false);
 
     //dereference each object here till array of products
-    products = products.products.products;
+    var products = productsData;
 
-    console.log(isLoggedIn.isLoggedIn);
+    var isLoggedIn = checkCookie();
+
+    console.log('isLoggedIn:', isLoggedIn);
     
     const filterProducts = (products) => {
         return products.filter((product) => product.inCart === true);
@@ -54,7 +58,7 @@ const Cart = (products, isLoggedIn) => {
                     </Grid>
                 ) : (
                     <Grid item xs={4}>
-                        <Item> <p>Please login first!</p> </Item>
+                        <Item> <p>Please login or signup to access the shopping cart.</p> </Item>
                     </Grid>
                 )}
                 {isLoggedIn && filterProducts(products).length !== 0 && (

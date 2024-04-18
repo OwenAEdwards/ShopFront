@@ -10,10 +10,16 @@ import { Button } from '@mui/material';
 
 const Login = () => {
 
+    // Handle sign-up button click
+    const handleSignup = () => {
+        // render the sign-up page
+        alert('Sign-up page is not implemented yet');
+    }
+
     // Handle form submission
     const handleFormSubmit = (event) => {
         event.preventDefault(); // Prevent form submission
-
+        
         // Get the input values
         const username = event.target.elements.username.value;
         const password = event.target.elements.password.value;
@@ -26,6 +32,13 @@ const Login = () => {
             // Set a cookie to indicate that the user is logged in
             document.cookie = 'loggedIn=true; path=/'; // Modify the cookie name and path as needed
             document.cookie = 'userType=admin; path=/'; // Modify the cookie name and path as needed
+            // Redirect to the dashboard or perform any other action
+        } else if (username === 'user' && password === 'password' && userType === 'user') {
+            // Successful login
+            alert('Login successful');
+            // Set a cookie to indicate that the user is logged in
+            document.cookie = 'loggedIn=true; path=/'; // Modify the cookie name and path as needed
+            document.cookie = 'userType=user; path=/'; // Modify the cookie name and path as needed
             // Redirect to the dashboard or perform any other action
         } else {
             // Invalid credentials
@@ -84,7 +97,7 @@ const Login = () => {
                         <Item> <br /> <br /> <h3><u>Need an account?</u></h3></Item>
                     </Grid>
                     <Grid item xs={8}>
-                        <Item><Button variant='outlined'>Sign-up</Button></Item>
+                        <Item><Button variant='outlined' onClick={handleSignup}>Sign-up</Button></Item>
                     </Grid>
                 </Grid>
             </form>
