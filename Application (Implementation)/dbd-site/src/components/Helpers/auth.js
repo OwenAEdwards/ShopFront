@@ -38,7 +38,6 @@ function checkName() {
     }
 }
 
-
 // export these functions to be used in other components
 export { checkCookie, checkAuth, checkName };
 
