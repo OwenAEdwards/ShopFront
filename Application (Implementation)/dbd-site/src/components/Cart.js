@@ -17,8 +17,6 @@ const Cart = () => {
     var products = productsData;
 
     var isLoggedIn = checkCookie();
-
-    console.log('isLoggedIn:', isLoggedIn);
     
     const filterProducts = (products) => {
         return products.filter((product) => product.inCart === true);

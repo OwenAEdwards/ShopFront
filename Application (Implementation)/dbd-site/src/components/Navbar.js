@@ -102,8 +102,6 @@ function ResponsiveAppBar() {
 
     var selectedButton = button.target.innerText;
 
-    console.log('selectedButton:', selectedButton);
-
     // Add logic to handle navigation based on the button clicked
     if (selectedButton === 'ADMIN TOOLS') {
       // Show the admin tools component
