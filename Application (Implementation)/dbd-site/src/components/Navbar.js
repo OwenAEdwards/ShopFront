@@ -24,7 +24,7 @@ import { Dialog } from '@mui/material';
 import Cart from './Cart';
 import Searchbar from './Searchbar';
 import AdminTools from './AdminTools';
-import { checkCookie, checkAuth } from './Helpers/auth';
+import { checkCookie, checkAuth, checkName } from './Helpers/auth';
 import {productsData} from './Objects/productsData.objects';
 
 function ResponsiveAppBar() {
@@ -52,6 +52,7 @@ function ResponsiveAppBar() {
   };
 
   var products = productsData;
+  var userName = checkName();
 
   // List of settings
   const settings = ['Cart'];
@@ -208,7 +209,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={userName} src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu

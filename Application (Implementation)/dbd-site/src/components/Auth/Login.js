@@ -7,6 +7,7 @@ import Item from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
+import { userAccounts } from '../Objects/userAccounts.objects';
 
 const Login = () => {
 
@@ -25,26 +26,16 @@ const Login = () => {
         const password = event.target.elements.password.value;
         const userType = event.target.elements.userType.value;
 
-        // Perform login credential check
-        if (username === 'admin' && password === 'password' && userType === 'admin') {
-            // Successful login
+        // Check if the user exists in the userAccounts object
+        if (userAccounts.find(user => user.username === username && user.accountType === userType && user.password === password)) {
             alert('Login successful');
-            // Set a cookie to indicate that the user is logged in
             document.cookie = 'loggedIn=true; path=/'; // Modify the cookie name and path as needed
-            document.cookie = 'userType=admin; path=/'; // Modify the cookie name and path as needed
-            // Redirect to the dashboard or perform any other action
-        } else if (username === 'user' && password === 'password' && userType === 'user') {
-            // Successful login
-            alert('Login successful');
-            // Set a cookie to indicate that the user is logged in
-            document.cookie = 'loggedIn=true; path=/'; // Modify the cookie name and path as needed
-            document.cookie = 'userType=user; path=/'; // Modify the cookie name and path as needed
-            // Redirect to the dashboard or perform any other action
+            document.cookie = `userType=${userType}; path=/`; // Modify the cookie name and path as needed
+            document.cookie = `userName=${username}; path=/`; // Modify the cookie name and path as needed
         } else {
-            // Invalid credentials
-            return alert('Invalid username or password');
-            // Display an error message or perform any other action
+            alert('Invalid username or password');
         }
+
     };
     
     // return login form here
