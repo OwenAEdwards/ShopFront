@@ -12,7 +12,6 @@ function checkCookie() {
     } else {
       loggedIn = false;
     };
-    console.log('loggedIn:', loggedIn)
     return loggedIn;
   }
   
