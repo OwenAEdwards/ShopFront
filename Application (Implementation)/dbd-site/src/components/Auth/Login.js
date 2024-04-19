@@ -8,13 +8,18 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { userAccounts } from '../Objects/userAccounts.objects';
+import Dialog from '@mui/material/Dialog';
+import Signup from './Signup';
 
 const Login = () => {
+
+    // State to show the sign-up page
+    const [ShowSignup, setShowSignup] = React.useState(false);
 
     // Handle sign-up button click
     const handleSignup = () => {
         // render the sign-up page
-        alert('Sign-up page is not implemented yet');
+        setShowSignup(true);
     }
 
     // Handle form submission
@@ -92,7 +97,13 @@ const Login = () => {
                     </Grid>
                 </Grid>
             </form>
+            {ShowSignup && (
+                <Dialog open={true} onClose={() => setShowSignup(false)}>
+                    <Signup />
+                </Dialog>
+            )}
         </Box>
+        
     );
 }
 

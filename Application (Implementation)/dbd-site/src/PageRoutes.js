@@ -5,6 +5,7 @@ import Home from './components/Home';
 import ProductDetail from './components/ProductList';
 import Cart from './components/Cart';
 import Login from './components/Auth/Login';
+import Signup from './components/Auth/Signup';
 
 const PageRoutes = () => {
   return (
@@ -14,6 +15,9 @@ const PageRoutes = () => {
         <Route path="/product/" component={ProductDetail} />
         <Route path="/cart" component={Cart} />
         <Route path="/login" element={Login} />
+        <Route path="/signup" element={Signup} />
+        <Route path="/login" element={Login} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>
