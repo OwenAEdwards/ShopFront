@@ -54,6 +54,11 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const handleCloseAdminTools = () => {
+    setShowAuth(false);
+    window.location.reload()
+  };
+
   var products = productsData;
   var userName = checkName();
 
@@ -273,7 +278,7 @@ function ResponsiveAppBar() {
       {/* Show the admin tools */}
       {showAuth && (
         <>
-          <Dialog open={showAuth} onClose={() => setShowAuth(false)}>
+          <Dialog open={showAuth} onClose={handleCloseAdminTools}>
             <AdminTools />
           </Dialog>
         </>

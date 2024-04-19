@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 
 const Signup = () => {
     const [userType, setUserType] = useState('admin');
-    const [isAdmin, setIsAdmin] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const handleToggleChange = () => {
         setIsAdmin(!isAdmin);
@@ -43,11 +43,6 @@ const Signup = () => {
                     <TextField
                         id="username"
                         label="Username"
-                        variant="outlined"
-                    />
-                    <TextField
-                        id="password"
-                        label="Password"
                         variant="outlined"
                     />
 

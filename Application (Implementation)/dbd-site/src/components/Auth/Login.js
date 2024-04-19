@@ -1,110 +1,120 @@
-// Login.js
-// Login Page for both users and staff members
-
-import React from 'react';
-import Grid from '@mui/material/Grid';
-import Item from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
-import { userAccounts } from '../Objects/userAccounts.objects';
-import Dialog from '@mui/material/Dialog';
-import Signup from './Signup';
+import React, { useState } from "react";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Switch from "@mui/material/Switch";
+import Dialog from "@mui/material/Dialog";
+import Signup from "./Signup";
+import { userAccounts } from "../Objects/userAccounts.objects";
 
 const Login = () => {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
-    // State to show the sign-up page
-    const [ShowSignup, setShowSignup] = React.useState(false);
+  const handleToggleChange = () => {
+    setIsAdmin((prevIsAdmin) => !prevIsAdmin);
+  };
 
-    // Handle sign-up button click
-    const handleSignup = () => {
-        // render the sign-up page
-        setShowSignup(true);
-    }
+  const handleSignup = () => {
+    setShowSignup(true);
+  };
 
-    // Handle form submission
-    const handleFormSubmit = (event) => {
-        event.preventDefault(); // Prevent form submission
-        
-        // Get the input values
-        const username = event.target.elements.username.value;
-        const password = event.target.elements.password.value;
-        const userType = event.target.elements.userType.value;
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
 
-        // Check if the user exists in the userAccounts object
-        if (userAccounts.find(user => user.username === username && user.accountType === userType && user.password === password)) {
-            alert('Login successful');
-            document.cookie = 'loggedIn=true; path=/'; // Modify the cookie name and path as needed
-            document.cookie = `userType=${userType}; path=/`; // Modify the cookie name and path as needed
-            document.cookie = `userName=${username}; path=/`; // Modify the cookie name and path as needed
-        } else {
-            alert('Invalid username or password');
-        }
+    const username = event.target.elements.username.value;
+  const userType = isAdmin ? "admin" : "user";
 
-    };
-    
-    // return login form here
-    return (
-        <Box height={500}
-            width={500}
-            my={4}
-            display="flex"
-            alignItems="center"
-            gap={4}
-            p={2}
-        >
-            {/* Below is the login page form.*/}
-            <form onSubmit={(event) => handleFormSubmit(event)}>
-                <Grid
-                    container
-                    spacing={2}
-                    direction="column"
-                >
-                    <Grid item xs={4}>
-                        <Item> <h1>Login:</h1> </Item>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Item> <TextField id="outlined-basic" label="Username" variant="outlined" name="username" /> </Item>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Item> <TextField id="outlined-basic" type='password' label="Password" variant="outlined" name="password" /> </Item>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Item>
-                            <TextField
-                                id="outlined-basic"
-                                label="User Type"
-                                variant="outlined"
-                                name="userType"
-                                select
-                                SelectProps={{
-                                    native: true,
-                                }}
-                            >
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
-                            </TextField>
-                        </Item>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Item><Button variant='contained' type="submit" >Sign-in</Button></Item>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Item> <br /> <br /> <h3><u>Need an account?</u></h3></Item>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Item><Button variant='outlined' onClick={handleSignup}>Sign-up</Button></Item>
-                    </Grid>
-                </Grid>
-            </form>
-            {ShowSignup && (
-                <Dialog open={true} onClose={() => setShowSignup(false)}>
-                    <Signup />
-                </Dialog>
-            )}
-        </Box>
-        
-    );
-}
+  let creditCard = null;
+
+  if (!isAdmin) {
+    // Retrieve creditCard value only if the field exists (not admin)
+    creditCard = event.target.elements.creditCard?.value;
+  }
+
+  const user = userAccounts.find(
+    (user) =>
+      user.username === username &&
+      user.accountType === userType &&
+      (isAdmin || user.creditCard === creditCard)
+  );
+
+  if (user) {
+    alert("Login successful");
+    document.cookie = "loggedIn=true; path=/";
+    document.cookie = `userType=${userType}; path=/`;
+    document.cookie = `userName=${username}; path=/`;
+    window.location.reload();
+  } else {
+    alert("Invalid username or credit card number");
+  }
+};
+
+  return (
+    <Box
+      height={500}
+      width={500}
+      my={4}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <form onSubmit={handleFormSubmit}>
+        <Grid container spacing={2} direction="column">
+          <Grid item>
+            <h1>Login:</h1>
+          </Grid>
+          <Grid item>
+            <label htmlFor="userType">Admin?</label>
+            <Switch
+              id="userType"
+              checked={isAdmin}
+              onChange={handleToggleChange}
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+              id="username"
+              label="Username"
+              variant="outlined"
+              name="username"
+            />
+          </Grid>
+          {!isAdmin && (
+            <Grid item>
+              <TextField
+                id="creditCard"
+                type="password"
+                label="Credit Card Number"
+                variant="outlined"
+                name="creditCard"
+              />
+            </Grid>
+          )}
+          <Grid item>
+            <Button variant="contained" type="submit">
+              Sign-in
+            </Button>
+          </Grid>
+          <Grid item>
+            <br />
+            <h3>
+              <u>Need an account?</u>
+            </h3>
+          </Grid>
+          <Grid item>
+            <Button variant="outlined" onClick={handleSignup}>
+              Sign-up
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+      <Dialog open={showSignup} onClose={() => setShowSignup(false)}>
+        <Signup />
+      </Dialog>
+    </Box>
+  );
+};
 
 export default Login;

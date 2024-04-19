@@ -6,25 +6,22 @@
 const userAccounts = [
     {
         username: "Christian",
-        password: "1234",
         accountType: "admin",
         balance: 100
     },
     {
         username: "Elias",
-        password: "1234",
         accountType: "admin",
         balance: 100
     },
     {
         username: "Owen",
-        password: "1234",
         accountType: "admin",
         balance: 100
     },
     {
         username: "user",
-        password: "user",
+        creditCard: "1234",
         accountType: "user",
         balance: 100
     }
