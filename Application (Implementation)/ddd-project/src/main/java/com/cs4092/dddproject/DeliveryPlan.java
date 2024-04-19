@@ -37,4 +37,14 @@ public class DeliveryPlan {
     @OneToOne
     @JoinColumn(name = "order_id")
     private Order order;
+
+    // New constructor without Order as last argument (used in DeliveryPlanService)
+    public DeliveryPlan(Long orderId, String deliveryType, BigDecimal deliveryPrice,
+                        LocalDate deliveryDate, LocalDate shipDate) {
+        this.orderId = orderId;
+        this.deliveryType = deliveryType;
+        this.deliveryPrice = deliveryPrice;
+        this.deliveryDate = deliveryDate;
+        this.shipDate = shipDate;
+    }
 }

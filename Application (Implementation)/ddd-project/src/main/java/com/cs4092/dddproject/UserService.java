@@ -5,11 +5,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    private final UserRepository userRepository;
+    private final StaffMemberRepository staffMemberRepository;
+    private final CustomerRepository customerRepository;
 
     // Dependency injection
     @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService(StaffMemberRepository staffMemberRepository, CustomerRepository customerRepository) {
+        this.staffMemberRepository = staffMemberRepository;
+        this.customerRepository = customerRepository;
     }
 }

@@ -21,4 +21,64 @@ public class CustomerService {
         this.customerRepository = customerRepository;
         this.orderRepository = orderRepository;
     }
+
+    // Add a new customer
+    public Customer addCustomer(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    // Add a new address for a customer
+    public void addAddress(Customer customer, Address address) {
+        customer.addAddress(address);
+        customerRepository.save(customer);
+    }
+
+    // Update an existing address
+    public void updateAddress(Customer customer, Address updatedAddress) {
+        // Find the address to update within the customer's list
+        Long addressIdToUpdate = updatedAddress.getAddressId(); // Assuming addressId is the identifier
+        Address addressToUpdate = customer.getAddresses().stream()
+                .filter(address -> address.getAddressId().equals(addressIdToUpdate))
+                .findFirst()
+                .orElse(null);
+
+        if (addressToUpdate != null) {
+            // Update the address details (excluding addressId)
+            addressToUpdate.setAddressType(updatedAddress.getAddressType());
+            addressToUpdate.setStreetAddress(updatedAddress.getStreetAddress());
+            addressToUpdate.setCity(updatedAddress.getCity());
+            addressToUpdate.setState(updatedAddress.getState());
+            addressToUpdate.setZipCode(updatedAddress.getZipCode());
+
+            // Save the updated customer object (assuming cascading save is not configured)
+            customerRepository.save(customer);
+        } else {
+            // Handle the case where the address to update is not found
+            // You might throw an exception or log an error message
+            throw new IllegalArgumentException("Address with ID: " + addressIdToUpdate + " not found for customer.");
+        }
+    }
+
+    // Add a new credit card for a customer
+    public void addCreditCard(Customer customer, CreditCard creditCard) {
+        customer.addCreditCard(creditCard);
+        customerRepository.save(customer);
+    }
+
+    // Place a new order for a customer
+    public Order placeOrder(Customer customer, Order order) {
+        // Set the customer for the order
+        order.setCustomer(customer);
+
+        // (Optional) Additional logic before saving the order, e.g., validating order items, processing payment
+
+        // Save the order
+        orderRepository.save(order);
+        return order;
+    }
+
+    // Find a customer by ID
+    public Customer getCustomerById(Long id) {
+        return customerRepository.findById(id).orElse(null);
+    }
 }
