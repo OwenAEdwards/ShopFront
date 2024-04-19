@@ -10,8 +10,8 @@ function Searchbar() {
 
     // Function to handle search query
     const searchQuery = (query) => {
-        console.log(query);
-        // Implement search functionality here
+        console.log('Search query:', query);
+        // Add logic to handle search query
     }
     
     // Search bar styling

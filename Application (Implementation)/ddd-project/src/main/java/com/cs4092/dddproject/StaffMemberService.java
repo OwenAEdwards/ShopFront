@@ -27,9 +27,17 @@ public class StaffMemberService {
         return productService.createProduct(product);
     }
 
+    // Update an existing product
+    public Product updateProcuct(Product product) { return productService.updateProduct(product); }
+
     // Process an order (assuming OrderService handles details)
     public void processOrder(Order order, Long targetWarehouseId) {
         orderService.processOrder(order, targetWarehouseId);
+    }
+
+    // Update quantity/availability of a product
+    public void updateInventory(Long productId, int quantityChange, Long targetWarehouseId) {
+        productService.updateInventory(productId, quantityChange, targetWarehouseId);
     }
 
     // View customer information by ID (assuming CustomerService handles details)
