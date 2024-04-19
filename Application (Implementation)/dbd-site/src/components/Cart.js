@@ -64,6 +64,10 @@ const Cart = () => {
                 {isLoggedIn && filterProducts(products).length !== 0 && (
                     <Grid item xs={4}>
                         <Item>
+                            <p>Total items: {filterProducts(products).length}</p>
+                            <p>Total price: ${filterProducts(products).reduce((acc, product) => acc + product.price, 0)}</p>
+                        </Item>
+                        <Item>
                             <button onClick={handlePurchase}>Purchase</button>
                         </Item>
                     </Grid>

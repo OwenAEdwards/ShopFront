@@ -2,6 +2,7 @@
 // MakePayments is a page that allows users to make payments.
 import React, { useState } from 'react';
 import Chip from '@mui/material/Chip';
+import { totalCartPrice } from '../Helpers/cart';
 
 const MakePayments = (products) => {
     const [amount, setAmount] = useState(0);
@@ -25,7 +26,7 @@ const MakePayments = (products) => {
             <h1>Total amount owed:</h1>
             <form onSubmit={handleSubmit}>
                 <label>
-                    <Chip label={"$"+"cost"} variant="outlined" />
+                    <Chip label={'$'+totalCartPrice()} variant="outlined" />
                 </label>
                 <br /> <br />
                 <label>
