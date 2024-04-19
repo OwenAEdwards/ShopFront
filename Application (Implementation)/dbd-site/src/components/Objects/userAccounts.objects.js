@@ -17,6 +17,11 @@ const userAccounts = [
     {
         username: "Owen",
         password: "1234",
+        accountType: "admin"
+    },
+    {
+        username: "user",
+        password: "user",
         accountType: "user"
     }
 ];

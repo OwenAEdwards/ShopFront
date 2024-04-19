@@ -26,6 +26,8 @@ import Searchbar from './Searchbar';
 import AdminTools from './AdminTools';
 import { checkCookie, checkAuth, checkName } from './Helpers/auth';
 import {productsData} from './Objects/productsData.objects';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import UserProfile from './Auth/UserProfile';
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -34,6 +36,7 @@ function ResponsiveAppBar() {
   const [showCart, setShowCart] = React.useState(false);
   const [showAuth, setShowAuth] = React.useState(false);
   const [showAbout, setShowAbout] = React.useState(false);
+  const [showUserProfile, setShowUserProfile] = React.useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -55,11 +58,12 @@ function ResponsiveAppBar() {
   var userName = checkName();
 
   // List of settings
-  const settings = ['Cart'];
+  const settings = [];
   const pages = ['About'];
 
   // Menu items based on logged in status
   if (checkCookie() == true) {
+    settings.push('User Profile');
     settings.push('Logout');
   } else { 
     settings.push('Login');
@@ -82,9 +86,9 @@ function ResponsiveAppBar() {
     } else if (selectedButton === 'Logout') {
       // Show the logout component
       setShowLogin(true);
-    } else if (selectedButton === 'Cart') {
+    } else if (selectedButton === 'User Profile') {
       // Redirect to the cart page
-      setShowCart(true);
+      setShowUserProfile(true);
     }
   };
 
@@ -205,6 +209,18 @@ function ResponsiveAppBar() {
           {/* Add blank space */}
           <Box sx={{ flexGrow: 0, width: '16px' }}></Box>
 
+          {/* show the cart button */}
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open cart">
+              <IconButton onClick={() => setShowCart(true)} sx={{ p: 0 }}>
+                <ShoppingCartIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+
+          {/* Add blank space */}
+          <Box sx={{ flexGrow: 0, width: '16px' }}></Box>
+
           {/* Show the user menu */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -273,6 +289,11 @@ function ResponsiveAppBar() {
           <Typography variant="body1" align="center">
             Created by Elias Weitfle, Owen Edwards, and Christian Graber
           </Typography>
+        </Dialog>
+      )}
+      {showUserProfile && (
+        <Dialog open={showUserProfile} onClose={() => setShowUserProfile(false)}>
+          <UserProfile />
         </Dialog>
       )}
     </AppBar>
