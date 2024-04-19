@@ -12,3 +12,5 @@
 - cd to dbd-site folder
 - npm install package.json
 - npm run
+
+## YOU WILL GET A LOT OF ERRORS / WARNINGS, JUST IGNORE THEM ##
