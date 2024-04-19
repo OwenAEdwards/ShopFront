@@ -1,22 +1,21 @@
 import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import { Checkbox, Grid} from '@mui/material';
+import { Grid} from '@mui/material';
 import ProductDetail from './ProductDetail';
 import ProductList from './ProductList';
 import Container from '@mui/material/Container';
 import Dialog from '@mui/material/Dialog';
 import { productsData } from './Objects/productsData.objects';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
 
 const AdminTools = () => {
 
     var products = productsData;
-    var removeMode = false;
 
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showAddProductForm, setShowAddProductForm] = useState(false);
+    const [showRemoveProductForm, setShowRemoveProductForm] = useState(false);
 
     const handleProductClick = (product) => {
         setSelectedProduct(product);
@@ -24,8 +23,24 @@ const AdminTools = () => {
 
     const handleRemoveProduct = (event) => {
         event.preventDefault();
-        products.pop();
+        
+        var id = document.getElementById('id').value;
+        
+        // Check if the ID is empty or invalid
+        if (id === '') {
+            alert('Please enter a product ID');
+            return;
+        }else if (id < 1 || id > products.length) {
+            alert('Invalid product ID');
+            return;
+        }
+
+        // Remove the product with the specified ID
+        products = products.filter(product => product.id !== parseInt(id));
+        
         alert('Product removed! Total products: ' + products.length);
+
+        setShowRemoveProductForm(false);
     };
 
     const handleAddProduct = (event) => {
@@ -49,7 +64,12 @@ const AdminTools = () => {
 
     const handleCloseForm = () => {
         setShowAddProductForm(false);
+        setShowRemoveProductForm(false);
     };
+
+    const handleShowRemoveProduct = () => {
+        setShowRemoveProductForm(true);
+    }
 
     return (
         <div>
@@ -65,9 +85,6 @@ const AdminTools = () => {
                 <h1>Admin Tools</h1>
                 <br />
                 <h2>Product Management</h2>
-                
-                <FormControlLabel control={<Switch onClick={ () => removeMode = !removeMode}/>} label="Remove product mode" />
-
                 <p> <b>DEBUG NOTE: Products do not currently update on homepage (rendering issue) but it does take effect still </b></p>
                 <br />
 
@@ -86,6 +103,7 @@ const AdminTools = () => {
                         {selectedProduct && <ProductDetail product={selectedProduct} />}
                         </Grid>
                     </Grid>
+                    
                     </Container>
                         
                     <Grid item xs={12}>
@@ -93,6 +111,14 @@ const AdminTools = () => {
                             <button onClick={handleAddShowProduct}>
                                 <AddIcon />
                                 Add Product
+                            </button>
+                        )}
+                    </Grid>
+                    <Grid item xs={12}>
+                        {!showRemoveProductForm && (
+                            <button onClick={handleShowRemoveProduct}>
+                                <RemoveIcon />
+                                Remove Product
                             </button>
                         )}
                     </Grid>
@@ -113,6 +139,22 @@ const AdminTools = () => {
                             </container>
                         </Dialog>
                     )}
+                    {showRemoveProductForm && (
+                        <Dialog open={true} onClose={handleCloseForm}>
+                            <container maxWidth="page">
+                            <h2>Remove Product</h2>
+                            <form>
+                                <input type="number" id="id" placeholder="Product ID" />
+                                <br />
+                                <br />
+                                <button onClick={handleRemoveProduct}>Remove Product</button>
+                            </form>
+                            </container>
+                        </Dialog>
+                    )}
+
+                    {/* blank space */}
+                    <Grid item xs={12}/>
                 </Grid>
             </Box>
         </div>
