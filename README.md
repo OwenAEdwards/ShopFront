@@ -108,5 +108,5 @@ We should do integration testing for the frontend.
     - **Implementation:** This should be a separate page. Should be pretty easy to implement, just allow querying customer information.
     - **CRUD:** Read-only.
 - **Feature:** Process orders.
-    - **Implementation:** Does this mean we have to confirm any orders that the customers make? If this is so, I'm implementing this feature last because it'll be extremely annoying to verify a customer order every time.
-    - **CRUD:** ???
+    - **Implementation:** Confirm any orders that the customers make.
+    - **CRUD:** Read-only.

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -48,6 +49,19 @@ public class ProductService {
     // Get all products
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    // Get a product by name (allegedly)
+    public Product getProductByName(String productName) {
+        List<Product> allProducts = productRepository.findAll();
+
+        // Filter products by name
+        List<Product> productsWithName = allProducts.stream()
+                .filter(product -> product.getProductName().equalsIgnoreCase(productName))
+                .collect(Collectors.toList());
+
+        // Return the first product found, or null if not found
+        return productsWithName.isEmpty() ? null : productsWithName.get(0);
     }
 
     // Delete a product (hard deletion)

@@ -11,7 +11,7 @@ function Searchbar() {
     // Function to handle search query
     const searchQuery = (query) => {
         console.log('Search query:', query);
-        // Add logic to handle search query
+        //TODO: Add logic to handle search query by productName
     }
     
     // Search bar styling
