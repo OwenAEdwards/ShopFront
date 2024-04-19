@@ -8,6 +8,7 @@ import ProductList from './ProductList';
 import ProcessCart from './Auth/ProcessCart';
 import { checkCookie } from './Helpers/auth';
 import { productsData } from './Objects/productsData.objects';
+import { itemsInCartCookie } from './Helpers/cart';
 
 const Cart = () => {
 
@@ -19,7 +20,9 @@ const Cart = () => {
     var isLoggedIn = checkCookie();
     
     const filterProducts = (products) => {
-        return products.filter((product) => product.inCart === true);
+        //TODO: IMPLEMENT PERSISTENT CART COOKIE HERE
+        itemsInCartCookie();
+        return products.filter(product => product.inCart === true);
     }
 
     // Handle display and opening of the product detail dialog
