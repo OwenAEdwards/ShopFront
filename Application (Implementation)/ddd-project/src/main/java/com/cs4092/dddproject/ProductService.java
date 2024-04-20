@@ -51,7 +51,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    // Get a product by name (allegedly)
+    // Get a product by name
     public Product getProductByName(String productName) {
         List<Product> allProducts = productRepository.findAll();
 

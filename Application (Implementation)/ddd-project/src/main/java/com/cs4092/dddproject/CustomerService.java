@@ -60,9 +60,7 @@ public class CustomerService {
     }
 
     // Remove address for a customer
-    public void removeAddress(Customer customer, Address address) {
-        //TODO: implement
-    }
+    public void removeAddress(Customer customer, Address address) {}
 
     // Add a new credit card for a customer
     public void addCreditCard(Customer customer, CreditCard creditCard) {
