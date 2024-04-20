@@ -74,4 +74,9 @@ public class OrderService {
                 .filter(order -> order.getCustomer().equals(customer))
                 .collect(Collectors.toList());
     }
+
+    // Get an order by its ID
+    public Order getOrderById(Long orderId) {
+        return orderRepository.findById(orderId).orElse(null);
+    }
 }

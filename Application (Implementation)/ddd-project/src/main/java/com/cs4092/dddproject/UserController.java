@@ -1,2 +1,4 @@
-package com.cs4092.dddproject;public class UserController {
+package com.cs4092.dddproject;
+
+public class UserController {
 }
