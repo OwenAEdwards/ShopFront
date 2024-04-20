@@ -44,6 +44,7 @@ const AdminTools = () => {
     };
 
     const handleAddProduct = (event) => {
+        
         products.push({
             id: (products.length + 1),
             name: document.getElementById('name').value,

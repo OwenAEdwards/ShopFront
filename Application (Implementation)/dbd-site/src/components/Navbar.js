@@ -54,6 +54,11 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const handleCloseAdminTools = () => {
+    setShowAuth(false);
+    window.location.reload()
+  };
+
   var products = productsData;
   var userName = checkName();
 
@@ -96,8 +101,6 @@ function ResponsiveAppBar() {
     setAnchorElUser(null); // close menu after clicking
 
     var selectedButton = button.target.innerText;
-
-    console.log('selectedButton:', selectedButton);
 
     // Add logic to handle navigation based on the button clicked
     if (selectedButton === 'ADMIN TOOLS') {
@@ -187,7 +190,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Owen Edwards
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -273,7 +276,7 @@ function ResponsiveAppBar() {
       {/* Show the admin tools */}
       {showAuth && (
         <>
-          <Dialog open={showAuth} onClose={() => setShowAuth(false)}>
+          <Dialog open={showAuth} onClose={handleCloseAdminTools}>
             <AdminTools />
           </Dialog>
         </>

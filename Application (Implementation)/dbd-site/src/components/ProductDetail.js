@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { addToCartCookie } from './Helpers/cart';
 
 // Product Detail Component
 // product: The product object to display details for
@@ -16,12 +17,12 @@ const ProductDetail = ({ product, showCartButton }) => {
     // Add / Remove the product to the cart
     // Update the product to indicate it is in the cart
     if (product.inCart === true){
-      console.log('Product removed from cart:', product);
       product.inCart = false;
+      removeFromCartCookie(product);
       setCartButton(!cartButton);
     }else{
-      console.log('Product added to cart:', product);
       product.inCart = true;
+      addToCartCookie(product);
       setCartButton(true);
     }
   }
@@ -35,8 +36,9 @@ const ProductDetail = ({ product, showCartButton }) => {
   return (
     <div>
       {/* Add any details you want to display in the popup*/}
-      <h2>{product.name}</h2>
-      <p><u>Description: </u> <br/> {product.longdescription}</p>
+      <h1><u>Product Details</u></h1>
+      <h3>{product.name}, {product.brand}, {product.size}, {product.category}</h3>
+      <p><u>Description: </u> <br/> {product.description}</p>
       <p>Price: ${product.price}</p>
 
       <img src={product.image} alt={" "} style={{ width: '100px', height: '100px' }} />

@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 
 const Signup = () => {
     const [userType, setUserType] = useState('admin');
-    const [isAdmin, setIsAdmin] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const handleToggleChange = () => {
         setIsAdmin(!isAdmin);
@@ -39,24 +39,31 @@ const Signup = () => {
                         checked={isAdmin}
                         onChange={handleToggleChange}
                     />
-
                     <TextField
                         id="username"
                         label="Username"
                         variant="outlined"
                     />
                     <TextField
-                        id="password"
-                        label="Password"
-                        variant="outlined"
-                    />
-
-                    <TextField
-                        id = "Address"
-                        label = "Address"
+                        id = "Street Address"
+                        label = "Street Address"
                         variant = "outlined"
                     />
-                    
+                    <TextField
+                        id = "City"
+                        label = "City"
+                        variant = "outlined"
+                    />
+                    <TextField
+                        id = "State"
+                        label = "State"
+                        variant = "outlined"
+                    />
+                    <textField
+                        id = "Zip Code"
+                        label = "Zip Code"
+                        variant = "outlined"
+                    />
                     {isAdmin ? (
                         <>
                         <TextField 
@@ -76,6 +83,11 @@ const Signup = () => {
                             id="creditCard"
                             label="Credit Card Number"
                             variant="outlined"
+                        />
+                        <TextField
+                        id="expirationDate"
+                        label="Expiration Date"
+                        variant="outlined"
                         />
                         </>
                     )}
