@@ -34,3 +34,5 @@ build/
 
 ### Implementation Config ###
 !/src/main/resources/application.properties
+
+!/src/main/resources/
