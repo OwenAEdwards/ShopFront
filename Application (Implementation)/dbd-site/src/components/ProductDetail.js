@@ -42,7 +42,7 @@ const ProductDetail = ({ product, showCartButton }) => {
       <p>Price: ${product.price}</p>
       <p>id:<i>{product.id}</i> Brand: <i>{product.brand}</i>, Size: <i>{product.size}</i>, Category: <i>{product.category}</i></p>
 
-      <img src={product.image} alt={" "} style={{ width: '100px', height: '100px' }} />
+        {/*<img src={product.image} alt={" "} style={{ width: '100px', height: '100px' }} />*/}
       
       {/* Added to cart button */}
       
