@@ -16,7 +16,6 @@ const PageRoutes = () => {
         <Route path="/cart" component={Cart} />
         <Route path="/login" element={Login} />
         <Route path="/signup" element={Signup} />
-        <Route path="/login" element={Login} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
         {/* Add more routes as needed */}
       </Routes>

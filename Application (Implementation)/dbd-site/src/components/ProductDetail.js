@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { addToCartCookie } from './Helpers/cart';
+import { addToCartCookie, removeFromCartCookie } from './Helpers/cart';
 
 // Product Detail Component
 // product: The product object to display details for

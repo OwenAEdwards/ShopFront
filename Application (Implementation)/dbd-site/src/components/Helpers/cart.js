@@ -44,4 +44,4 @@ function totalCartPrice() {
     return total;
 }
 
-export { isCartEmpty, totalCartPrice, itemsInCartCookie, addToCartCookie};
+export { isCartEmpty, totalCartPrice, itemsInCartCookie, addToCartCookie, removeFromCartCookie};
