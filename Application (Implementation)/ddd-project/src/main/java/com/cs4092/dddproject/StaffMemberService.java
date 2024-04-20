@@ -30,6 +30,9 @@ public class StaffMemberService {
     // Update an existing product
     public Product updateProcuct(Product product) { return productService.updateProduct(product); }
 
+    // Delete an existing product
+    public void deleteProduct(long productId) { productService.deleteProduct(productId); }
+
     // Process an order (assuming OrderService handles details)
     public void processOrder(Order order, Long targetWarehouseId) {
         orderService.processOrder(order, targetWarehouseId);

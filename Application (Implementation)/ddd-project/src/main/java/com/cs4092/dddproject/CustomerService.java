@@ -59,10 +59,40 @@ public class CustomerService {
         }
     }
 
+    // Remove address for a customer
+    public void removeAddress(Customer customer, Address address) {
+        //TODO: implement
+    }
+
     // Add a new credit card for a customer
     public void addCreditCard(Customer customer, CreditCard creditCard) {
         customer.addCreditCard(creditCard);
         customerRepository.save(customer);
+    }
+
+    // Modify existing credit card for a customer
+    public CreditCard updateCreditCard(CreditCard creditCard) {
+        CreditCard existingCard = creditCardRepository.findById(creditCard.getCreditCardId()).orElse(null);
+        if (existingCard == null) {
+            throw new IllegalArgumentException("Card with ID: " + creditCard.getCreditCardId() + " not found.");
+        }
+
+        existingCard.setCardNumber(creditCard.getCardNumber());
+        existingCard.setAddress(creditCard.getAddress());
+        existingCard.setExpirationDate(creditCard.getExpirationDate());
+
+        return creditCardRepository.save(existingCard);
+    }
+
+    // Remove credit card for a customer
+    public void removeCreditCard(long creditCardId) {
+            CreditCard creditCard = creditCardRepository.findById(creditCardId).orElse(null);
+            if (creditCard == null) {
+                throw new IllegalArgumentException("Card with ID: " + creditCardId + " not found.");
+            }
+
+            // Perform hard deletion using the repository
+            creditCardRepository.deleteById(creditCardId);
     }
 
     // Place a new order for a customer
