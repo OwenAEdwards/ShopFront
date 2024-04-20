@@ -25,7 +25,8 @@ const AdminTools = () => {
     const handleRemoveProduct = (event) => {
         event.preventDefault();
         
-        const id = document.getElementById('id').value;
+        //const id = document.getElementById('id').value;
+        const id = 1
 
         deleteProductCookie(id);
         
@@ -34,6 +35,8 @@ const AdminTools = () => {
         products = getProductCookies(); // Update the products list
 
         setShowRemoveProductForm(false);
+
+        location.reload()
     };
 
     const handleAddProduct = (event) => {
@@ -57,6 +60,7 @@ const AdminTools = () => {
         console.log(products);
         
         setShowAddProductForm(false);
+        location.reload()
     };
 
     const handleAddShowProduct = () => {
@@ -117,7 +121,7 @@ const AdminTools = () => {
                     </Grid>
                     <Grid item xs={12}>
                         {!showRemoveProductForm && (
-                            <button onClick={handleShowRemoveProduct}>
+                            <button onClick={handleRemoveProduct}>
                                 <RemoveIcon />
                                 Remove Product
                             </button>

@@ -40,7 +40,9 @@ function deleteProductCookie(productId) {
     let products = getProductCookies();
 
     // Find the index of the product with matching id in the array
-    let index = products.findIndex(product => product.id === productId);
+    //let index = products.findIndex(product => product.id === productId);
+    let index = products.length;
+    products.pop()
 
     // If the product is found, remove it from the array
     if (index !== -1) {
