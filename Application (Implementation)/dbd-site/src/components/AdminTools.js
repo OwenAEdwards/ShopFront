@@ -8,6 +8,7 @@ import ProductList from './ProductList';
 import Container from '@mui/material/Container';
 import Dialog from '@mui/material/Dialog';
 import { productsData } from './Objects/productsData.objects';
+import { addProductCookie } from './Helpers/products';
 
 const AdminTools = () => {
 
@@ -24,19 +25,9 @@ const AdminTools = () => {
     const handleRemoveProduct = (event) => {
         event.preventDefault();
         
-        var id = document.getElementById('id').value;
-        
-        // Check if the ID is empty or invalid
-        if (id === '') {
-            alert('Please enter a product ID');
-            return;
-        }else if (id < 1 || id > products.length) {
-            alert('Invalid product ID');
-            return;
-        }
+        const id = document.getElementById('id').value;
 
-        // Remove the product with the specified ID
-        products = products.filter(product => product.id !== parseInt(id));
+        deleteProductCookie(id);
         
         alert('Product removed! Total products: ' + products.length);
 
@@ -45,13 +36,17 @@ const AdminTools = () => {
 
     const handleAddProduct = (event) => {
         
-        products.push({
+        const productToAdd = ({
             id: (products.length + 1),
+            category: document.getElementById('category').value,
             name: document.getElementById('name').value,
+            brand: document.getElementById('brand').value,
+            size: document.getElementById('size').value,
             description: document.getElementById('description').value,
-            longdescription: document.getElementById('longdescription').value,
             price: document.getElementById('price').value,
         });
+
+        addProductCookie(productToAdd);
 
         alert('Product added! Total products: ' + products.length);
         event.preventDefault();
@@ -129,9 +124,11 @@ const AdminTools = () => {
                             <container maxWidth="page">
                             <h2>Add Product</h2>
                             <form>
+                                <input type="text" id="category" placeholder="Category" />
                                 <input type="text" id="name" placeholder="Name" />
+                                <input type="text" id="brand" placeholder="Brand" />
+                                <input type="text" id="size" placeholder="Size" />
                                 <input type="text" id="description" placeholder="Description" />
-                                <input type="text" id="longdescription" placeholder="Long Description" />
                                 <input type="number" id="price" placeholder="Price" />
                                 <br />
                                 <br />

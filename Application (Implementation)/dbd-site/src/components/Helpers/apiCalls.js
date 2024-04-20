@@ -5,9 +5,9 @@ function testFetch() {
 
     // This is the data object that will be sent to the API endpoint
     const dataObject = {
-        product_id: 1,
+        //productId: 1,
         category: 'shoes',
-        product_name: 'Product 1',
+        productName: 'Product 1',
         brand: 'Brand X',
         size: 'Big',
         description: 'This is product 1',
