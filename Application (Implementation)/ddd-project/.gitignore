@@ -33,6 +33,5 @@ build/
 .vscode/
 
 ### Implementation Config ###
-!/src/main/resources/application.properties
-
-!/src/main/resources/
+src/main/resources/application.properties
+src/main/resources/
