@@ -45,7 +45,12 @@ We should do integration testing for the frontend.
 
 ## VII. Backend Files
 ### API/Presentation Layer (Controllers)
-- TBA
+- **UserController:** This controller handles user-related API requests: registration, login, profile management (if UserService is kept).
+- **CustomerController:** This controller handles customer-related API requests: adding/managing addresses, credit cards, and orders.
+- **StaffMemberController:** This controller handles staff member-related API requests: creating/managing products, processing orders, viewing customer information. *Likely redundant and needing removed.*
+- **ProductController:** This controller handles product-related API requests: searching, adding, and updating product information.
+- **OrderController:** This controller handles order-related API requests: placing, processing, and tracking orders.
+- **DeliveryPlanController:** If delivery logic is complex and warrants separate management, this controller handles delivery plan related actions: calculating costs and scheduling deliveries.
 ### Business Logic/Application Layer (Services)
 - **UserService**: This class implements business logic related to users, such as registration, login, and profile management. NOTE: might need to remove later.
 - **CustomerService**: This class implements business logic related to customers, such as adding and managing addresses, credit cards, and orders.
