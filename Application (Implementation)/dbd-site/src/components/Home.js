@@ -37,14 +37,18 @@ const Home = () => {
 
         <Container maxWidth="page"> {/* Wrap the content in a Container component */}
           <Grid container spacing={2}>
-            {products.map((product) => (
-              <Grid item xs={12} md={2} key={product.id}>
-                <div className="product-list-wrapper" style={{ overflowWrap: 'break-word' }}>
-                  {/* Include the ProductList component */}
-                  <ProductList products={[product]} onProductClick={handleProductClick} />
-                </div>
-              </Grid>
-            ))}
+            {products.length === 0 ? (
+              <p>No Products Available</p>
+            ) : (
+              products.map((product) => (
+                <Grid item xs={12} md={2} key={product.id}>
+                  <div className="product-list-wrapper" style={{ overflowWrap: 'break-word' }}>
+                    {/* Include the ProductList component */}
+                    <ProductList products={[product]} onProductClick={handleProductClick} />
+                  </div>
+                </Grid>
+              ))
+            )}
             <Grid item xs={12} md={6}>
               {selectedProduct && <ProductDetail product={selectedProduct} />}
             </Grid>

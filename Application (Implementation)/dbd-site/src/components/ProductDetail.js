@@ -36,11 +36,11 @@ const ProductDetail = ({ product, showCartButton }) => {
   return (
     <div>
       {/* Add any details you want to display in the popup*/}
-      <h1><u>Product Details</u></h1>
+      <h1><u>Product Details:</u></h1>
       <h2>{product.name}</h2>
       <p><u>Description: </u> <br/> {product.description}</p>
       <p>Price: ${product.price}</p>
-      <p>Brand: <i>{product.brand}</i>, Size: <i>{product.size}</i>, Category: <i>{product.category}</i></p>
+      <p>id:<i>{product.id}</i> Brand: <i>{product.brand}</i>, Size: <i>{product.size}</i>, Category: <i>{product.category}</i></p>
 
       <img src={product.image} alt={" "} style={{ width: '100px', height: '100px' }} />
       

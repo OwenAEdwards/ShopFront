@@ -1,7 +1,7 @@
 // Dummy product data (replace with your actual product data)
 
-import { getProductCookies } from "../Helpers/products";
-import { addProductCookie } from "../Helpers/products";
+import { getProductCookies, setProductCookies } from "../Helpers/products";
+
 
 /*
 CREATE TABLE IF NOT EXISTS Products (
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Products (
 );
 */
 
-// Dummy product data (replace with your actual product data)
+// Here is an example of a product object
 const initialProduct = {
     id: 1,
     category: 'shoes',
@@ -26,12 +26,7 @@ const initialProduct = {
     price: 10.00
 };
 
-// Add the initial product to the products cookie
-addProductCookie(initialProduct);
-if (!getProductCookies().some(product => product.id === initialProduct.id)) {
-  addProductCookie(initialProduct);
-}
-
+// Set the initial product data
 var productsData = getProductCookies();
 
 export {productsData};

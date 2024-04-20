@@ -8,7 +8,7 @@ import ProductList from './ProductList';
 import Container from '@mui/material/Container';
 import Dialog from '@mui/material/Dialog';
 import { productsData } from './Objects/productsData.objects';
-import { addProductCookie } from './Helpers/products';
+import { addProductCookie, deleteProductCookie, getProductCookies } from './Helpers/products';
 
 const AdminTools = () => {
 
@@ -31,6 +31,8 @@ const AdminTools = () => {
         
         alert('Product removed! Total products: ' + products.length);
 
+        products = getProductCookies(); // Update the products list
+
         setShowRemoveProductForm(false);
     };
 
@@ -50,6 +52,9 @@ const AdminTools = () => {
 
         alert('Product added! Total products: ' + products.length);
         event.preventDefault();
+
+        products = getProductCookies(); // Update the products list
+        console.log(products);
         
         setShowAddProductForm(false);
     };

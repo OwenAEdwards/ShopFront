@@ -10,7 +10,7 @@ function addProductCookie(product) {
     let productsString = JSON.stringify(products);
 
     // Set the cookie with the updated products
-    document.cookie = `products=${productsString}; expires=session`;
+    document.cookie = `products=${productsString}`;
 }
 
 // Function to get all product cookies
@@ -54,4 +54,12 @@ function deleteProductCookie(productId) {
     }
 }
 
-export { addProductCookie, getProductCookies, deleteProductCookie };   
+function setProductCookies(products) {
+    // Convert the array to a string
+    let productsString = JSON.stringify(products);
+
+    // Set the cookie with the updated products
+    document.cookie = `products=${productsString}`
+}
+
+export { addProductCookie, getProductCookies, deleteProductCookie, setProductCookies };   
