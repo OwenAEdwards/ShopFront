@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS Users (
 
 --DROP SCHEMA public CASCADE;
 
-CREATE TABLE IF NOT EXISTS Addresses (
+CREATE TABLE IF NOT EXISTS Address (
     address_id SERIAL PRIMARY KEY,
     address_type VARCHAR(20) NOT NULL, -- 'Delivery' or 'Payment'
     street_address VARCHAR(255) NOT NULL,
@@ -43,36 +43,36 @@ CREATE TABLE IF NOT EXISTS Addresses (
 );
 
 -- Create the CreditCards table (for multiple credit cards per user)
-CREATE TABLE IF NOT EXISTS CreditCards (
+CREATE TABLE IF NOT EXISTS CreditCard (
     card_id SERIAL PRIMARY KEY,
     card_number VARCHAR(20) NOT NULL,
     expiration_date DATE NOT NULL,
 	address_id SERIAL NOT NULL,
-	FOREIGN KEY (address_id) REFERENCES Addresses(address_id)
+	FOREIGN KEY (address_id) REFERENCES Address(address_id)
 );
 
-CREATE TABLE IF NOT EXISTS Customers (
+CREATE TABLE IF NOT EXISTS Customer (
 	customer_id SERIAL PRIMARY KEY,
 	name VARCHAR(100) NOT NULL,
 	address_id SERIAL NOT NULL,
 	card_id SERIAL NOT NULL,
 	balance DECIMAL(10, 2) DEFAULT 0.0,
-	FOREIGN KEY (address_id) REFERENCES Addresses(address_id),
-	FOREIGN KEY (card_id) REFERENCES CreditCards(card_id)
+	FOREIGN KEY (address_id) REFERENCES Address(address_id),
+	FOREIGN KEY (card_id) REFERENCES CreditCard(card_id)
 );
 
 -- Create the StaffMembers table
-CREATE TABLE IF NOT EXISTS StaffMembers (
+CREATE TABLE IF NOT EXISTS StaffMember (
     staff_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     address_id SERIAL NOT NULL,
     salary DECIMAL(10, 2) NOT NULL,
     job_title VARCHAR(50) NOT NULL,
-	FOREIGN KEY (address_id) REFERENCES Addresses(address_id)
+	FOREIGN KEY (address_id) REFERENCES Address(address_id)
 );
 
 -- Create the Products table
-CREATE TABLE IF NOT EXISTS Products (
+CREATE TABLE IF NOT EXISTS Product (
     product_id SERIAL PRIMARY KEY,
     category VARCHAR(50) NOT NULL,
     product_name VARCHAR(100) NOT NULL,
@@ -83,11 +83,11 @@ CREATE TABLE IF NOT EXISTS Products (
 );
 
 -- Create the Warehouses table
-CREATE TABLE IF NOT EXISTS Warehouses (
+CREATE TABLE IF NOT EXISTS Warehouse (
     warehouse_id SERIAL PRIMARY KEY,
     address_id SERIAL NOT NULL,
     capacity INT NOT NULL, -- New field for warehouse capacity
-	FOREIGN KEY (address_id) REFERENCES Addresses(address_id)
+	FOREIGN KEY (address_id) REFERENCES Address(address_id)
 );
 
 -- Create the Stock table
@@ -96,29 +96,29 @@ CREATE TABLE IF NOT EXISTS Stock (
     product_id SERIAL NOT NULL,
     warehouse_id SERIAL NOT NULL,
     quantity INT NOT NULL,
-	FOREIGN KEY (warehouse_id) REFERENCES Warehouses(warehouse_id),
-	FOREIGN KEY (product_id) REFERENCES Products(product_id)
+	FOREIGN KEY (warehouse_id) REFERENCES Warehouse(warehouse_id),
+	FOREIGN KEY (product_id) REFERENCES Product(product_id)
 );
 
 -- Create the Orders table
-CREATE TABLE IF NOT EXISTS Orders (
+CREATE TABLE IF NOT EXISTS "order" (
     order_id SERIAL PRIMARY KEY,
     order_status VARCHAR(20) NOT NULL, -- 'Issued', 'Sent', or 'Received'
 	customer_id SERIAL NOT NULL,
     card_id SERIAL NOT NULL,
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	FOREIGN KEY (card_id) REFERENCES CreditCards(card_id),
-	FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+	FOREIGN KEY (card_id) REFERENCES CreditCard(card_id),
+	FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
 );
 
 -- Create the OrderItems table
-CREATE TABLE IF NOT EXISTS OrderItems (
+CREATE TABLE IF NOT EXISTS OrderItem (
     order_item_id SERIAL PRIMARY KEY,
     order_id SERIAL NOT NULL,
     product_id SERIAL NOT NULL,
     quantity INT NOT NULL,
-	FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-	FOREIGN KEY (product_id) REFERENCES Products(product_id)
+	FOREIGN KEY (order_id) REFERENCES "order"(order_id),
+	FOREIGN KEY (product_id) REFERENCES Product(product_id)
 );
 
 -- Create the DeliveryPlan table
@@ -128,22 +128,22 @@ CREATE TABLE IF NOT EXISTS DeliveryPlan (
     delivery_price DECIMAL(10, 2) NOT NULL,
     delivery_date DATE NOT NULL,
     ship_date DATE NOT NULL,
-	FOREIGN KEY (order_id) REFERENCES Orders(order_id)
+	FOREIGN KEY (order_id) REFERENCES "order"(order_id)
 );
 
 -- Create the Suppliers table
-CREATE TABLE IF NOT EXISTS Suppliers (
+CREATE TABLE IF NOT EXISTS Supplier (
     supplier_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     address_id SERIAL NOT NULL,
-	FOREIGN KEY (address_id) REFERENCES Addresses(address_id)
+	FOREIGN KEY (address_id) REFERENCES Address(address_id)
 );
 
 -- Create the SupplierItems table (for supplier-specific prices)
-CREATE TABLE IF NOT EXISTS SupplierItems (
+CREATE TABLE IF NOT EXISTS SupplierItem (
     supplier_id SERIAL NOT NULL,
     product_id SERIAL NOT NULL,
     supplier_price DECIMAL(10, 2) NOT NULL,
-	FOREIGN KEY (supplier_id) REFERENCES Suppliers(supplier_id),
-	FOREIGN KEY (product_id) REFERENCES Products(product_id)
+	FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id),
+	FOREIGN KEY (product_id) REFERENCES Product(product_id)
 );

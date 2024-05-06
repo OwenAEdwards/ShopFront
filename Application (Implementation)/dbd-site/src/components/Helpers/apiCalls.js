@@ -5,7 +5,6 @@ function testFetch() {
 
     // This is the data object that will be sent to the API endpoint
     const dataObject = {
-        //productId: 1,
         category: 'shoes',
         productName: 'Product 1',
         brand: 'Brand X',
@@ -14,12 +13,14 @@ function testFetch() {
         price: 10.00
     };
 
+    const jsonData = JSON.stringify(dataObject);
+
     fetch('http://localhost:8080/api/products', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: dataObject
+        body: jsonData
     })
     .then(response => console.log(response))
     .then(data => console.log(data))
