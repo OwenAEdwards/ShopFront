@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS CreditCard (
 CREATE TABLE IF NOT EXISTS Customer (
 	customer_id SERIAL PRIMARY KEY,
 	name VARCHAR(100) NOT NULL,
-	address_id SERIAL NOT NULL,
-	card_id SERIAL NOT NULL,
+	address_id SERIAL,
+	card_id SERIAL,
 	balance DECIMAL(10, 2) DEFAULT 0.0,
 	FOREIGN KEY (address_id) REFERENCES Address(address_id),
 	FOREIGN KEY (card_id) REFERENCES CreditCard(card_id)
@@ -65,9 +65,7 @@ CREATE TABLE IF NOT EXISTS Customer (
 CREATE TABLE IF NOT EXISTS StaffMember (
     staff_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    address_id SERIAL NOT NULL,
-    salary DECIMAL(10, 2) NOT NULL,
-    job_title VARCHAR(50) NOT NULL,
+    address_id SERIAL,
 	FOREIGN KEY (address_id) REFERENCES Address(address_id)
 );
 

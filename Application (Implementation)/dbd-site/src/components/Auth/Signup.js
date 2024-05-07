@@ -44,53 +44,6 @@ const Signup = () => {
                         label="Username"
                         variant="outlined"
                     />
-                    <TextField
-                        id = "Street Address"
-                        label = "Street Address"
-                        variant = "outlined"
-                    />
-                    <TextField
-                        id = "City"
-                        label = "City"
-                        variant = "outlined"
-                    />
-                    <TextField
-                        id = "State"
-                        label = "State"
-                        variant = "outlined"
-                    />
-                    <textField
-                        id = "Zip Code"
-                        label = "Zip Code"
-                        variant = "outlined"
-                    />
-                    {isAdmin ? (
-                        <>
-                        <TextField 
-                            id = "salary"
-                            label = "Salary"
-                            variant = "outlined"
-                        />
-                        <TextField 
-                            id = 'jobTitle'
-                            label = 'Job Title'
-                            variant = 'outlined'
-                        />
-                        </>
-                    ) : (
-                        <>
-                        <TextField
-                            id="creditCard"
-                            label="Credit Card Number"
-                            variant="outlined"
-                        />
-                        <TextField
-                        id="expirationDate"
-                        label="Expiration Date"
-                        variant="outlined"
-                        />
-                        </>
-                    )}
 
                     <Button onSubmit={handleCreateUser} type="submit" variant="contained">
                         Submit
