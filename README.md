@@ -38,10 +38,9 @@ We should do integration testing for the frontend.
     - Data member names and method names should be as descriptive as possible (longer == better).
 - Documentation: Should probably document APIs in a MD file or something.
 
-## VI. Don't Need
+## VI. Entity-Relationship (ER) Diagram
 
-- Agile.
-- Unit tests.
+![ER-diagram](./ER-model/ER-diagram%20model.png)
 
 ## VII. Backend Files
 ### API/Presentation Layer (Controllers)
@@ -83,7 +82,7 @@ We should do integration testing for the frontend.
 - **Supplier**: This class represents a supplier of products.
 - **SupplierItem**: This class represents a product offered by a specific supplier, including the supplier's price for that product.
 
-## VII. Frontend Files
+## VIII. Frontend Files
 ### Customer User Web Pages
 - **Feature:** Search store for products and look up information about specific products.
     - **Implementation:** Click "more info" on a specific product listing.
