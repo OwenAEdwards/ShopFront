@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS Users (
 -- delivery and/or for payment)
 
 
---DROP SCHEMA public CASCADE;
 
 CREATE TABLE IF NOT EXISTS Address (
     address_id SERIAL PRIMARY KEY,
@@ -43,7 +42,7 @@ CREATE TABLE IF NOT EXISTS Address (
 );
 
 -- Create the CreditCards table (for multiple credit cards per user)
-CREATE TABLE IF NOT EXISTS CreditCard (
+CREATE TABLE IF NOT EXISTS Credit_Card (
     card_id SERIAL PRIMARY KEY,
     card_number VARCHAR(20) NOT NULL,
     expiration_date DATE NOT NULL,
@@ -58,11 +57,11 @@ CREATE TABLE IF NOT EXISTS Customer (
 	card_id SERIAL,
 	balance DECIMAL(10, 2) DEFAULT 0.0,
 	FOREIGN KEY (address_id) REFERENCES Address(address_id),
-	FOREIGN KEY (card_id) REFERENCES CreditCard(card_id)
+	FOREIGN KEY (card_id) REFERENCES Credit_Card(card_id)
 );
 
 -- Create the StaffMembers table
-CREATE TABLE IF NOT EXISTS StaffMember (
+CREATE TABLE IF NOT EXISTS Staff_Member (
     staff_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     address_id SERIAL,
@@ -105,12 +104,12 @@ CREATE TABLE IF NOT EXISTS "order" (
 	customer_id SERIAL NOT NULL,
     card_id SERIAL NOT NULL,
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	FOREIGN KEY (card_id) REFERENCES CreditCard(card_id),
+	FOREIGN KEY (card_id) REFERENCES Credit_Card(card_id),
 	FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
 );
 
 -- Create the OrderItems table
-CREATE TABLE IF NOT EXISTS OrderItem (
+CREATE TABLE IF NOT EXISTS Order_Item (
     order_item_id SERIAL PRIMARY KEY,
     order_id SERIAL NOT NULL,
     product_id SERIAL NOT NULL,
@@ -120,7 +119,7 @@ CREATE TABLE IF NOT EXISTS OrderItem (
 );
 
 -- Create the DeliveryPlan table
-CREATE TABLE IF NOT EXISTS DeliveryPlan (
+CREATE TABLE IF NOT EXISTS Delivery_Plan (
     order_id SERIAL NOT NULL,
     delivery_type VARCHAR(20) NOT NULL, -- 'Express', 'Standard', or 'Customizable'
     delivery_price DECIMAL(10, 2) NOT NULL,
@@ -138,7 +137,7 @@ CREATE TABLE IF NOT EXISTS Supplier (
 );
 
 -- Create the SupplierItems table (for supplier-specific prices)
-CREATE TABLE IF NOT EXISTS SupplierItem (
+CREATE TABLE IF NOT EXISTS Supplier_Item (
     supplier_id SERIAL NOT NULL,
     product_id SERIAL NOT NULL,
     supplier_price DECIMAL(10, 2) NOT NULL,

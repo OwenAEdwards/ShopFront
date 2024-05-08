@@ -11,6 +11,7 @@ import java.util.List;
 
 /* This class represents an order placed by a customer. */
 @Entity
+@Table(name = "\"order\"")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

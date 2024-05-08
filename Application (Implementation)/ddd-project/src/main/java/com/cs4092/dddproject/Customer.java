@@ -25,24 +25,13 @@ public class Customer {
     @NotEmpty
     private String name;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL) // Cascade persist/save
     private List<Address> addresses;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL) // Cascade persist/save
     private List<CreditCard> creditCards;
 
     @Column(precision = 10, scale = 2)
     @DecimalMin(value = "0.0")
     private BigDecimal balance;
-
-    // HELPER FUNCTIONS IN CustomerService
-    public void addAddress(Address address) {
-        this.addresses.add(address);
-        address.setCustomer(this); // Set the bidirectional relationship
-    }
-
-    public void addCreditCard(CreditCard creditCard) {
-        this.creditCards.add(creditCard);
-        creditCard.setCustomer(this); // Set the bidirectional relationship (if applicable)
-    }
 }

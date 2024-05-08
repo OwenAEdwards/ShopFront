@@ -1,4 +1,3 @@
-
 // This is a simple example of how to make an API call using the Fetch API. This example fetches data from an API endpoint and logs the retrieved data to the console.
 
 function testFetch() {
@@ -27,4 +26,14 @@ function testFetch() {
     .catch(error => console.error(error));
 }
 
-testFetch();
+function fetchAllProducts() {
+    fetch('http://localhost:8080/api/products', {
+        method: 'GET'
+    })
+    .then(response => response.json()) // Parse the response as JSON
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+}
+
+//testFetch();
+//fetchAllProducts();

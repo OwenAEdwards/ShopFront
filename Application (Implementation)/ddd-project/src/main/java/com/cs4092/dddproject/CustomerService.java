@@ -29,8 +29,8 @@ public class CustomerService {
 
     // Add a new address for a customer
     public void addAddress(Customer customer, Address address) {
-        customer.addAddress(address);
-        customerRepository.save(customer);
+        customer.getAddresses().add(address); // Add to the list in Customer
+        customerRepository.save(customer); // JPA cascades the save operation
     }
 
     // Update an existing address
@@ -64,15 +64,15 @@ public class CustomerService {
 
     // Add a new credit card for a customer
     public void addCreditCard(Customer customer, CreditCard creditCard) {
-        customer.addCreditCard(creditCard);
-        customerRepository.save(customer);
+        customer.getCreditCards().add(creditCard); // Add to the list in Customer
+        customerRepository.save(customer); // JPA cascades the save operation
     }
 
     // Modify existing credit card for a customer
     public CreditCard updateCreditCard(CreditCard creditCard) {
-        CreditCard existingCard = creditCardRepository.findById(creditCard.getCreditCardId()).orElse(null);
+        CreditCard existingCard = creditCardRepository.findById(creditCard.getCardId()).orElse(null);
         if (existingCard == null) {
-            throw new IllegalArgumentException("Card with ID: " + creditCard.getCreditCardId() + " not found.");
+            throw new IllegalArgumentException("Card with ID: " + creditCard.getCardId() + " not found.");
         }
 
         existingCard.setCardNumber(creditCard.getCardNumber());

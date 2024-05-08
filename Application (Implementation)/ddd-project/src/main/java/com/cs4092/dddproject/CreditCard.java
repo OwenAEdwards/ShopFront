@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class CreditCard {
     @Id // Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long creditCardId;
+    private Long cardId;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false) // Foreign key
