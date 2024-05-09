@@ -10,59 +10,92 @@ const productObject = {
     price: 10.00
 };
 
-// TODO: make function calls be performed asynchronously
-// TODO: add exception handling for HTTP statuses
-
-function testCreateProduct(productObject) {
+async function createProduct(productObject) {
     const url = 'http://localhost:8080/api/products';
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(productObject) // Body expects JSON string
-    })
-    .then(response => console.log(response))
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productObject) // Body expects JSON string
+        });
+
+        if (!response.ok) {
+            throw new Error(`API call failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Product created successfully:", data);
+    }
+    catch(error) {
+        console.error("Error creating product:", error);
+    }
 }
 
-function testGetAllProducts() {
+async function getAllProducts() {
     const url = 'http://localhost:8080/api/products';
-    fetch(url, {
-        method: 'GET'
-    })
-    .then(response => response.json()) // Parse the response as JSON
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+    try {
+        const response = await fetch(url, {
+            method: 'GET'
+        });
+
+        if (!response.ok) {
+            throw new Error(`API call failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Products:", data);
+    }
+    catch(error) {
+        console.error("Error retrieving products:", error);
+    }
 }
 
-function testGetProductById(productId) {
+async function getProductById(productId) {
     // Construct the URL with the productId variable
     const url = `http://localhost:8080/api/products/${productId}`;
-    fetch(url, {
-        method: 'GET'
-    })
-    .then(response => response.json()) // Parse the response as JSON
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+    try {
+        const response = await fetch(url, {
+            method: 'GET'
+        });
+
+        if (!response.ok) {
+            throw new Error(`API call failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Product:", data);
+    }
+    catch(error) {
+        console.error("Error retrieving product:", error);
+    }
 }
 
-function testGetProductByName(productName) {
+async function getProductByName(productName) {
     // Construct the URL with the productName variable
     const url = `http://localhost:8080/api/products/search?name=${productName}`;
-    fetch(url, {
+    try {
+        const response = await fetch(url, {
         method: 'GET'
-    })
-    .then(response => response.json()) // Parse the response as JSON
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+        });
+
+        if (!response.ok) {
+            throw new Error(`API call failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Product:", data);
+    }
+    catch(error) {
+        console.error("Error retrieving product:", error);
+    }
 }
 
-// Parameters on testUpdateProduct() explained:
+// Parameters on updateProduct() explained:
 // productId: the productId we're updating with new data (via PUT request)
 // productObject: the JavaScript object representing new data we're putting in place of the old data
-function testUpdateProduct(productId, productObject) {
+async function updateProduct(productId, productObject) {
     // Changing the productObject being PUT/updated
     productObject = {
         category: 'shirt',
@@ -74,32 +107,49 @@ function testUpdateProduct(productId, productObject) {
     }
     // Construct the URL with the productId variable
     const url = `http://localhost:8080/api/products/${productId}`;
-    fetch(url, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json' // Set content type to JSON
-          },
-        body: JSON.stringify(productObject) // Body expects JSON string
-    })
-    .then(response => response.json()) // Parse the response as JSON
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json' // Set content type to JSON
+            },
+            body: JSON.stringify(productObject) // Body expects JSON string
+        });
+
+        if (!response.ok) {
+            throw new Error(`API call failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Product updated successfully:", data);
+    }
+    catch(error) {
+        console.error("Error updating product:", error);
+    }
 }
 
-function testDeleteProduct(productId) {
+async function deleteProduct(productId) {
     // Construct the URL with the productId variable
     const url = `http://localhost:8080/api/products/${productId}`;
-    fetch(url, {
-        method: 'DELETE'
-    })
-    //.then(response => response.json()) // Parse the response as JSON
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE'
+        });
+
+        if (!response.ok) {
+            throw new Error(`API call failed with status ${response.status}`);
+        }
+
+        console.log("Product deleted successfully"); // Assuming successful deletion doesn't require a response body
+    }
+    catch(error) {
+        console.error("Error deleting product:", error);
+    }
 }
 
-//testCreateProduct(productObject);
-//testGetAllProducts();
-//testGetProductById(1);
-//testGetProductByName("Product 1");
-//testUpdateProduct(1, productObject);
-//testDeleteProduct(1);
+//createProduct(productObject);
+//getAllProducts();
+//getProductById(1);
+//getProductByName("Product 1");
+//updateProduct(1, productObject);
+//deleteProduct(1);
