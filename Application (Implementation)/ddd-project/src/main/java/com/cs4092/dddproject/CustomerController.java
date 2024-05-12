@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/api/customers")
 @CrossOrigin(origins = "*")
@@ -21,6 +23,7 @@ public class CustomerController {
     // Create a new customer
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) {
+        customer.setBalance(BigDecimal.ZERO); // Set balance to 0.00 before saving
         Customer savedCustomer = customerService.addCustomer(customer);
         return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
     }
@@ -38,7 +41,7 @@ public class CustomerController {
 
     // Update an existing address for a customer by ID
     @PutMapping("/{customerId}/addresses/{addressId}")
-    public ResponseEntity<Customer> updateAddress(@PathVariable Long customerId, @PathVariable Long addressId, @Valid @RequestBody Address updatedAddress) {
+    public ResponseEntity<Customer> updateAddress(@PathVariable Long customerId, @Valid @RequestBody Address updatedAddress) {
         Customer customer = customerService.getCustomerById(customerId);
         if (customer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -30,6 +30,7 @@ public class CustomerService {
     // Add a new address for a customer
     public void addAddress(Customer customer, Address address) {
         customer.getAddresses().add(address); // Add to the list in Customer
+        address.setCustomer(customer); // Referencing address back to its customer
         customerRepository.save(customer); // JPA cascades the save operation
     }
 

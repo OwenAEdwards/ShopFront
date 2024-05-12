@@ -1,5 +1,6 @@
 package com.cs4092.dddproject;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
@@ -25,10 +26,11 @@ public class Customer {
     @NotEmpty
     private String name;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL) // Cascade persist/save
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Cascade persist/save
+    @JsonManagedReference
     private List<Address> addresses;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL) // Cascade persist/save
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Cascade persist/save
     private List<CreditCard> creditCards;
 
     @Column(precision = 10, scale = 2)

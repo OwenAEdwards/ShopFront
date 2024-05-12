@@ -1,6 +1,6 @@
 // This is a simple example of how to make an API call using the Fetch API. This example fetches data from an API endpoint and logs the retrieved data to the console.
 
-// This is the data object that will be sent to the API endpoint
+// This is the product data object that will be sent to the API endpoint
 const productObject = {
     category: 'shoes',
     productName: 'Product 1',

@@ -1,5 +1,6 @@
 package com.cs4092.dddproject;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -16,8 +17,9 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long addressId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id") // Foreign key
+    @JsonBackReference
     private Customer customer;
 
     @OneToOne
@@ -32,7 +34,7 @@ public class Address {
     @JoinColumn(name = "supplier_id") // Foreign key
     private Supplier supplier;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id") // Foreign key
     private CreditCard creditCard;
 
