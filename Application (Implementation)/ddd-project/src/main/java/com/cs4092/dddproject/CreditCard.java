@@ -1,5 +1,6 @@
 package com.cs4092.dddproject;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -19,8 +20,9 @@ public class CreditCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cardId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false) // Foreign key
+    @JsonBackReference
     private Customer customer;
 
     @Column(nullable = false)
@@ -30,10 +32,6 @@ public class CreditCard {
     @OneToOne
     @JoinColumn(name = "card_id") // Foreign key
     private Order order;
-
-    @OneToOne
-    @JoinColumn(name = "address_id") // Foreign key
-    private Address address;
 
     @Column(nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) // For proper serialization

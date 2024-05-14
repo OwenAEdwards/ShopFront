@@ -66,22 +66,39 @@ public class CustomerService {
     // Add a new credit card for a customer
     public void addCreditCard(Customer customer, CreditCard creditCard) {
         customer.getCreditCards().add(creditCard); // Add to the list in Customer
+        creditCard.setCustomer(customer); // Referencing creditCard back to its customer
         customerRepository.save(customer); // JPA cascades the save operation
     }
 
     // Modify existing credit card for a customer
-    public CreditCard updateCreditCard(CreditCard creditCard) {
-        CreditCard existingCard = creditCardRepository.findById(creditCard.getCardId()).orElse(null);
-        if (existingCard == null) {
-            throw new IllegalArgumentException("Card with ID: " + creditCard.getCardId() + " not found.");
+    public CreditCard updateCreditCard(Customer customer, CreditCard updatedCreditCard) {
+
+        // Validate customer existence (optional)
+        if (customer == null || customer.getCustomerId() == null) {
+            throw new IllegalArgumentException("Customer information is missing.");
         }
 
-        existingCard.setCardNumber(creditCard.getCardNumber());
-        existingCard.setAddress(creditCard.getAddress());
-        existingCard.setExpirationDate(creditCard.getExpirationDate());
+        // Find the existing card based on cardId within the customer (assuming association)
+        CreditCard existingCard = customer.getCreditCards().stream()
+                .filter(card -> card.getCardId().equals(updatedCreditCard.getCardId()))
+                .findFirst()
+                .orElse(null);
 
-        return creditCardRepository.save(existingCard);
+        if (existingCard == null) {
+            throw new IllegalArgumentException("Card with ID: " + updatedCreditCard.getCardId() + " not found for customer.");
+        }
+
+        // Update the existing card details
+        existingCard.setCardNumber(updatedCreditCard.getCardNumber() != null ? updatedCreditCard.getCardNumber() : existingCard.getCardNumber()); // Assuming card number updates are allowed
+        existingCard.setExpirationDate(updatedCreditCard.getExpirationDate() != null ? updatedCreditCard.getExpirationDate() : existingCard.getExpirationDate());
+        // Update other relevant fields as needed (CVV update might require additional logic)
+
+        // Save the updated customer object (assuming cascading save for credit cards)
+        customerRepository.save(customer);
+
+        return existingCard;
     }
+
 
     // Remove credit card for a customer
     public void removeCreditCard(long creditCardId) {

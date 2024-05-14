@@ -14,6 +14,11 @@ const addressObject = {
     zipCode: '10004'
 };
 
+const creditCardObject = {
+    cardNumber: '838025628908905',
+    expirationDate: '2010-04-20' // YYYY-MM-DD
+};
+
 async function createCustomer(customerObject) {
     const url = 'http://localhost:8080/api/customers';
     try {
@@ -66,7 +71,7 @@ async function addAddressToCustomer(customerId, addressObject) {
 // customerId: the customerId we're updating with new data (via PUT request)
 // addressObject: the JavaScript object representing new data we're putting in place of the old data
 async function updateAddress(customerId, addressObject) {
-  // Changing the productObject being PUT/updated
+  // Changing the addressObject being PUT/updated
   addressObject = {
       addressType: 'Delivery',
       streetAddress: 'New Street',
@@ -98,17 +103,75 @@ async function updateAddress(customerId, addressObject) {
   }
 }
 
+async function addCreditCardToCustomer(customerId, creditCardObject) {
+    const url = `http://localhost:8080/api/customers/${customerId}/credit-cards`;
+    creditCardObject.customerId = customerId; // Associate specific customerId with addressObject
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(creditCardObject) // Body expects JSON string
+        });
+  
+        if (!response.ok) {
+            throw new Error(`API call failed with status ${response.status}`);
+        }
+  
+        const data = await response.json();
+        console.log("Credit card added successfully:", data); // Assuming successful addition returns the updated customer object
+    }
+    catch(error) {
+        console.error("Error adding credit card:", error);
+    }
+}
+
+// Parameters on updateCreditCard() explained:
+// customerId: the customerId we're updating with new data (via PUT request)
+// creditCardObject: the JavaScript object representing new data we're putting in place of the old data
+async function updateCreditCard(customerId, creditCardObject) {
+  // Changing the creditCardObject being PUT/updated
+  creditCardObject = {
+      cardNumber: '2946987302258922',
+      expirationDate: '2024-05-13', // YYYY-MM-DD
+      cardId: 1 // assuming this, this is bad practice
+  }
+  // Construct the URL with the productId variable
+  const url = `http://localhost:8080/api/customers/${customerId}/credit-cards/${creditCardObject.customerId}`;
+  try {
+      const response = await fetch(url, {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json' // Set content type to JSON
+          },
+          body: JSON.stringify(creditCardObject) // Body expects JSON string
+      });
+
+      if (!response.ok) {
+          throw new Error(`API call failed with status ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Credit card updated successfully:", data);
+  }
+  catch(error) {
+      console.error("Error updating credit card:", error);
+  }
+}
+
 // TODO: async function deleteAddress() -> needs a Service layer and Controller layer implementation
-
-// TODO: async function addCreditCard() -> should be pretty easy to implement
-
-// TODO: async function updateCreditCard() -> needs a Service layer and Controller layer implementation
 
 // TODO: async function deleteCreditCard() -> needs a Service layer and Controller layer implementation
 
 // TODO: add getCustomerById() and getAllCustomers() to staffMemberApiCalls.js probably 
 
 //createCustomer(customerObject);
+
 //addAddressToCustomer(1, addressObject);
 //updateAddress(1, addressObject);
 //deleteAddress(1, addressObject);
+
+//addCreditCardToCustomer(1, creditCardObject);
+updateCreditCard(1, creditCardObject);

@@ -34,10 +34,6 @@ public class Address {
     @JoinColumn(name = "supplier_id") // Foreign key
     private Supplier supplier;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "card_id") // Foreign key
-    private CreditCard creditCard;
-
     @Column(nullable = false)
     @NotEmpty
     private String addressType; // 'Delivery' or 'Payment'

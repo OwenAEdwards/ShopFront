@@ -31,6 +31,7 @@ public class Customer {
     private List<Address> addresses;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Cascade persist/save
+    @JsonManagedReference
     private List<CreditCard> creditCards;
 
     @Column(precision = 10, scale = 2)

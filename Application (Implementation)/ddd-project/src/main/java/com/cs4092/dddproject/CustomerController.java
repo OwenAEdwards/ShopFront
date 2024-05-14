@@ -66,6 +66,22 @@ public class CustomerController {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
+    // Update an existing credit card for a customer by ID
+    @PutMapping("/{customerId}/credit-cards/{cardId}")
+    public ResponseEntity<Customer> updateCreditCard(@PathVariable Long customerId, @Valid @RequestBody CreditCard updatedCreditCard) {
+        Customer customer = customerService.getCustomerById(customerId);
+        if (customer == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        try {
+            customerService.updateCreditCard(customer, updatedCreditCard);
+            return new ResponseEntity<>(customerService.getCustomerById(customerId), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            // TODO: add message for exception
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     // This might be better placed in OrderController depending on our architecture
     // @PostMapping("/{customerId}/orders")
     // public ResponseEntity<Order> placeOrder(@PathVariable Long customerId, @Valid @RequestBody Order order) {
