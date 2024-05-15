@@ -61,7 +61,12 @@ public class CustomerService {
     }
 
     // Remove address for a customer
-    public void removeAddress(Customer customer, Address address) {}
+    public void removeAddress(Long customerId, Long addressId) {
+        Customer customer = customerRepository.findById(customerId).get();
+        customer.getAddresses().removeIf(a -> a.getAddressId().equals(addressId));
+        addressRepository.deleteById(addressId);
+    }
+
 
     // Add a new credit card for a customer
     public void addCreditCard(Customer customer, CreditCard creditCard) {
@@ -101,14 +106,10 @@ public class CustomerService {
 
 
     // Remove credit card for a customer
-    public void removeCreditCard(long creditCardId) {
-            CreditCard creditCard = creditCardRepository.findById(creditCardId).orElse(null);
-            if (creditCard == null) {
-                throw new IllegalArgumentException("Card with ID: " + creditCardId + " not found.");
-            }
-
-            // Perform hard deletion using the repository
-            creditCardRepository.deleteById(creditCardId);
+    public void removeCreditCard(Long customerId, Long cardId) {
+        Customer customer = customerRepository.findById(customerId).get();
+        customer.getCreditCards().removeIf(c -> c.getCardId().equals(cardId));
+        creditCardRepository.deleteById(cardId);
     }
 
     // Place a new order for a customer

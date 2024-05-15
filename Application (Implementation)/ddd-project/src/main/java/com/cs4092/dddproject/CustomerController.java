@@ -55,6 +55,14 @@ public class CustomerController {
         }
     }
 
+    // Delete an address (hard deletion)
+    @DeleteMapping("/{customerId}/addresses/{addressId}")
+    public ResponseEntity<Void> removeCustomerAddress(@PathVariable Long customerId,
+                                                      @PathVariable Long addressId) {
+        customerService.removeAddress(customerId, addressId);
+        return ResponseEntity.noContent().build(); // Return a 204 No Content response
+    }
+
     // Add a new credit card for a customer by ID
     @PostMapping("/{customerId}/credit-cards")
     public ResponseEntity<Customer> addCreditCard(@PathVariable Long customerId, @Valid @RequestBody CreditCard creditCard) {
@@ -80,6 +88,14 @@ public class CustomerController {
             // TODO: add message for exception
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    // Delete a credit card (hard deletion)
+    @DeleteMapping("/{customerId}/credit-cards/{cardId}")
+    public ResponseEntity<Void> removeCustomerCreditCard(@PathVariable Long customerId,
+                                                      @PathVariable Long cardId) {
+        customerService.removeCreditCard(customerId, cardId);
+        return ResponseEntity.noContent().build(); // Return a 204 No Content response
     }
 
     // This might be better placed in OrderController depending on our architecture

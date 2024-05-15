@@ -80,7 +80,7 @@ async function updateAddress(customerId, addressObject) {
       zipCode: '92011',
       addressId: 1 // assuming this, this is bad practice
   }
-  // Construct the URL with the productId variable
+  // Construct the URL with the customerId and addressId variables
   const url = `http://localhost:8080/api/customers/${customerId}/addresses/${addressObject.addressId}`;
   try {
       const response = await fetch(url, {
@@ -100,6 +100,25 @@ async function updateAddress(customerId, addressObject) {
   }
   catch(error) {
       console.error("Error updating address:", error);
+  }
+}
+
+async function deleteCustomerAddress(customerId, addressId) {
+  // Construct the URL with the customerId and addressId variables
+  const url = `http://localhost:8080/api/customers/${customerId}/addresses/${addressId}`;
+  try {
+      const response = await fetch(url, {
+          method: 'DELETE'
+      });
+
+      if (!response.ok) {
+          throw new Error(`API call failed with status ${response.status}`);
+      }
+
+      console.log("Address deleted successfully"); // Assuming successful deletion doesn't require a response body
+  }
+  catch(error) {
+      console.error("Error deleting address:", error);
   }
 }
 
@@ -161,17 +180,35 @@ async function updateCreditCard(customerId, creditCardObject) {
   }
 }
 
-// TODO: async function deleteAddress() -> needs a Service layer and Controller layer implementation
+async function deleteCustomerCreditCard(customerId, cardId) {
+  // Construct the URL with the customerId and cardId variables
+  const url = `http://localhost:8080/api/customers/${customerId}/credit-cards/${cardId}`;
+  try {
+      const response = await fetch(url, {
+          method: 'DELETE'
+      });
 
-// TODO: async function deleteCreditCard() -> needs a Service layer and Controller layer implementation
+      if (!response.ok) {
+          throw new Error(`API call failed with status ${response.status}`);
+      }
+
+      console.log("Credit card deleted successfully"); // Assuming successful deletion doesn't require a response body
+  }
+  catch(error) {
+      console.error("Error deleting credit card:", error);
+  }
+}
 
 // TODO: add getCustomerById() and getAllCustomers() to staffMemberApiCalls.js probably 
+
+// TODO: probably put some DELETE request for Customer in staffMemberApiCalls.js
 
 //createCustomer(customerObject);
 
 //addAddressToCustomer(1, addressObject);
 //updateAddress(1, addressObject);
-//deleteAddress(1, addressObject);
+//deleteCustomerAddress(1, 1);
 
 //addCreditCardToCustomer(1, creditCardObject);
-updateCreditCard(1, creditCardObject);
+//updateCreditCard(1, creditCardObject);
+//deleteCustomerCreditCard(1, 1);
