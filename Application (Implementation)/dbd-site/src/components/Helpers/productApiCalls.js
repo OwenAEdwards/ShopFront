@@ -148,6 +148,34 @@ async function deleteProductById(productId) {
     }
 }
 
+// TODO: validate with a non-null Stock (requires call to updateInventory() to update quantity on Stock)
+async function getProductAvailability(productId, quantity) {
+    // Construct the URL with the productId and quantity variables
+    const url = `http://localhost:8080/api/products/${productId}/availability?quantity=${quantity}`;
+    try {
+        const response = await fetch(url, {
+        method: 'GET'
+        });
+
+        if (!response.ok) {
+            throw new Error(`API call failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Availability:", data);
+    }
+    catch(error) {
+        console.error("Error retrieving availability:", error);
+    }
+}
+
+// TODO: make a way to create a Warehouse entity in the database (probably through staffMemberApiCalls.js)
+// TODO: then use this Warehouse entity to update the quantity changed
+// QUESTION: do we blow away Warehouse???
+async function updateInventory(productId, warehouseId, quantityChange) {
+    
+}
+
 // Export the functions to be used in other files
 export { createProduct, getAllProducts, getProductById, getProductByName, updateProductById, deleteProductById};
 
@@ -160,3 +188,5 @@ export { createProduct, getAllProducts, getProductById, getProductByName, update
 //getProductByName("Product 1");
 //updateProductById(1, productObject);
 //deleteProductById(1);
+//getProductAvailability(1, 0);
+//updateInventory(1, 1, 5);
