@@ -46,6 +46,7 @@ async function getAllProducts() {
 
         const data = await response.json();
         console.log("Products:", data);
+        return data;
     }
     catch(error) {
         console.error("Error retrieving products:", error);
@@ -95,7 +96,7 @@ async function getProductByName(productName) {
 // Parameters on updateProduct() explained:
 // productId: the productId we're updating with new data (via PUT request)
 // productObject: the JavaScript object representing new data we're putting in place of the old data
-async function updateProduct(productId, productObject) {
+async function updateProductById(productId, productObject) {
     // Changing the productObject being PUT/updated
     productObject = {
         category: 'shirt',
@@ -128,7 +129,7 @@ async function updateProduct(productId, productObject) {
     }
 }
 
-async function deleteProduct(productId) {
+async function deleteProductById(productId) {
     // Construct the URL with the productId variable
     const url = `http://localhost:8080/api/products/${productId}`;
     try {
@@ -147,9 +148,15 @@ async function deleteProduct(productId) {
     }
 }
 
+// Export the functions to be used in other files
+export { createProduct, getAllProducts, getProductById, getProductByName, updateProductById, deleteProductById};
+
+
+// Usage examples
+
 //createProduct(productObject);
 //getAllProducts();
 //getProductById(1);
 //getProductByName("Product 1");
-//updateProduct(1, productObject);
-//deleteProduct(1);
+//updateProductById(1, productObject);
+//deleteProductById(1);

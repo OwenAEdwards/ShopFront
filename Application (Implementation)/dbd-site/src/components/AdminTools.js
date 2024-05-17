@@ -8,7 +8,7 @@ import ProductList from './ProductList';
 import Container from '@mui/material/Container';
 import Dialog from '@mui/material/Dialog';
 import { productsData } from './Objects/productsData.objects';
-import { addProductCookie, deleteProductCookie, getProductCookies } from './Helpers/products';
+import { createProduct, getAllProducts, deleteProductById } from './Helpers/productApiCalls';
 
 const AdminTools = () => {
 
@@ -23,40 +23,39 @@ const AdminTools = () => {
     };
 
     const handleRemoveProduct = (event) => {
-        event.preventDefault();
         
-        //const id = document.getElementById('id').value;
-        const id = 1
+        var id = document.getElementById('id').value
 
-        deleteProductCookie(id);
+        // Delete the product from the API
+        deleteProductById(id);
         
         alert('Product removed! Total products: ' + products.length);
-
-        products = getProductCookies(); // Update the products list
-
+        
         setShowRemoveProductForm(false);
 
+        event.preventDefault();
         location.reload()
     };
 
     const handleAddProduct = (event) => {
         
-        const productToAdd = ({
-            id: (products.length + 1),
+        // This is the product data object that will be sent to the API endpoint
+        const productObject = {
             category: document.getElementById('category').value,
-            name: document.getElementById('name').value,
+            productName: document.getElementById('name').value,
             brand: document.getElementById('brand').value,
             size: document.getElementById('size').value,
             description: document.getElementById('description').value,
             price: document.getElementById('price').value,
-        });
-
-        addProductCookie(productToAdd);
+        };
+        
+        // Create the product in the API
+        createProduct(productObject);
 
         alert('Product added! Total products: ' + products.length);
         event.preventDefault();
 
-        products = getProductCookies(); // Update the products list
+        products = getAllProducts();
         console.log(products);
         
         setShowAddProductForm(false);
@@ -90,7 +89,7 @@ const AdminTools = () => {
                 <h1>Admin Tools</h1>
                 <br />
                 <h2>Product Management</h2>
-                <p> <b>DEBUG NOTE: Products do not currently update on homepage (rendering issue) but it does take effect still </b></p>
+                <p>Click on a product to view more details</p>
                 <br />
 
                 <Grid container spacing={2}>
@@ -121,7 +120,7 @@ const AdminTools = () => {
                     </Grid>
                     <Grid item xs={12}>
                         {!showRemoveProductForm && (
-                            <button onClick={handleRemoveProduct}>
+                            <button onClick={handleShowRemoveProduct}>
                                 <RemoveIcon />
                                 Remove Product
                             </button>
