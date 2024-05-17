@@ -199,6 +199,10 @@ async function deleteCustomerCreditCard(customerId, cardId) {
   }
 }
 
+export { createCustomer, addAddressToCustomer, updateAddress, deleteCustomerAddress, addCreditCardToCustomer, updateCreditCard, deleteCustomerCreditCard };
+
+// Export the functions to be used in other files
+
 // TODO: add getCustomerById() and getAllCustomers() to staffMemberApiCalls.js probably 
 
 // TODO: probably put some DELETE request for Customer in staffMemberApiCalls.js

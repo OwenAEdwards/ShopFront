@@ -19,7 +19,7 @@ const AppCard = ({ product, onClick }) => {
       <Card variant="outlined" onClick={() => onClick(product)}>
         <CardContent>
           <Typography variant="h5" component="div">
-            {product.name}
+            {product.productName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {product.description}

@@ -1,6 +1,5 @@
 // Dummy product data (replace with your actual product data)
-
-import { getProductCookies, setProductCookies } from "../Helpers/products";
+import { getAllProducts } from "../Helpers/productApiCalls";
 
 
 /*
@@ -15,18 +14,15 @@ CREATE TABLE IF NOT EXISTS Products (
 );
 */
 
-// Here is an example of a product object
-const initialProduct = {
-    id: 1,
-    category: 'shoes',
-    name: 'Product 1',
-    brand: 'Brand X',
-    size: 'Big',
-    description: 'This is product 1',
-    price: 10.00
-};
-
 // Set the initial product data
-var productsData = getProductCookies();
+
+// Get all products from the API and store them in the productsData variable (use await)
+
+try{
+    var productsData = await getAllProducts();
+}catch(error){
+    console.error(error);
+    productsData = [];
+}
 
 export {productsData};
