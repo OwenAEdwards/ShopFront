@@ -1,5 +1,7 @@
 // This is a simple example of how to make an API call using the Fetch API. This example fetches data from an API endpoint and logs the retrieved data to the console.
 
+import { setCustomerAccount } from '../Objects/customerAccounts.objects';
+
 // This is the customer data object that will be sent to the API endpoint
 // NOTE: customer has credit cards and addresses but these are not explicitly columns in the table, balance is 0.00 by default
 const customerObject = {
@@ -141,6 +143,13 @@ async function verifyCustomerByCredentials(username, password) {
 
         const data = await response.json();
         console.log("Credentials:", data);
+
+        // If the credentials are correct, set the user account locally
+        if (data == true) {
+            setCustomerAccount(username, password);
+            console.log("Credentials verified successfully");
+        }
+
         return data;
     }   
     

@@ -14,30 +14,26 @@ CREATE TABLE IF NOT EXISTS Addresses (
 );
 */
 
-const userAccounts = [
-    {
-        username: "Christian",
-        accountType: "admin",
-    },
-    {
-        username: "Elias",
-        accountType: "admin",
-    },
-    {
-        username: "Owen",
-        accountType: "admin",
-    },
-    {
-        username: "user",
-        creditCard: "1234",
-        accountType: "user",
-        streetAddress: "",
-        city: "",
-        state: "",
-        zipCode: "",
-        balance: 100
-    }
-];
+var userAccounts = [];
+
+function setCustomerAccount(username, password) {
+    userAccounts = [
+        {
+            username: username,
+            password: password,
+        },
+    ];
+    console.log("User accounts:", userAccounts);
+}
+
+function getCustomerAccount() {
+    console.log("User accounts:", userAccounts);
+    return userAccounts;
+}
+
+function clearCustomerAccount() {
+    userAccounts = [];
+}
 
 // Export the user accounts object
-export { userAccounts}
+export { setCustomerAccount as userAccounts, clearCustomerAccount, getCustomerAccount, setCustomerAccount}

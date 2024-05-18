@@ -6,7 +6,7 @@ import Item from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import ProductList from './ProductList';
 import ProcessCart from './Auth/ProcessCart';
-import { checkCookie } from './Helpers/auth';
+import { checkIfLoggedIn } from './Helpers/auth';
 import { productsData } from './Objects/productsData.objects';
 import { itemsInCartCookie } from './Helpers/cart';
 
@@ -17,7 +17,7 @@ const Cart = () => {
     //dereference each object here till array of products
     var products = productsData;
 
-    var isLoggedIn = checkCookie();
+    var isLoggedIn = checkIfLoggedIn();
     
     const filterProducts = (products) => {
         //TODO: IMPLEMENT PERSISTENT CART COOKIE HERE

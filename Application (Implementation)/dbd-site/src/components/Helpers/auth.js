@@ -1,34 +1,39 @@
 // File: auth.js
 // This file contains helper functions for authentication
 
+import { getCustomerAccount } from "../Objects/customerAccounts.objects";
+import { verifyCustomerByCredentials } from "./customerApiCalls";
+
 // global declare these functions here to allow for export
 
 // check if the user is logged in
-function checkCookie() {
-    const isLoggedIn = document.cookie.includes('loggedIn=true');
-    var loggedIn = false;
-    if (isLoggedIn) {
-      var loggedIn = true;
+function checkIfLoggedIn() {
+    var customer = getCustomerAccount();
+    
+    if (customer.length > 0) {
+      var customer_auth_username = customer[0].username;
+      var customer_auth_password = customer[0].password;
     } else {
-      loggedIn = false;
-    };
-    return loggedIn;
-  }
+      customer = [];
+    }
+
+    var user = verifyCustomerByCredentials(customer_auth_username, customer_auth_password);
+    
+    
+}
   
 // check if the user is an admin or a user
 function checkAuth() {
-    if (checkCookie() == true) {
-      if (document.cookie.includes('userType=admin')) {
-        return 'Admin';
-      } else {
-        return 'User';
-      }
+    if (checkIfLoggedIn == true) {
+      return 'User';
+    }else{
+      return 'Admin';
     }
   }
 
 // check if the user has a name stored in the cookie
 function checkName() {
-    if (checkCookie() == true) {
+    if (checkIfLoggedIn == true) {
       if (document.cookie.includes('userName=')) {
         return document.cookie.split('userName=')[1].split(';')[0];
       } else {
@@ -38,5 +43,5 @@ function checkName() {
 }
 
 // export these functions to be used in other components
-export { checkCookie, checkAuth, checkName };
+export { checkIfLoggedIn, checkAuth, checkName };
 
