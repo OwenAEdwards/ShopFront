@@ -3,7 +3,8 @@
 // This is the customer data object that will be sent to the API endpoint
 // NOTE: customer has credit cards and addresses but these are not explicitly columns in the table, balance is 0.00 by default
 const customerObject = {
-    name: 'Owen'
+    name: 'Owen',
+    password: 'password'
 };
 
 const addressObject = {
@@ -39,7 +40,29 @@ async function createCustomer(customerObject) {
   }
   catch(error) {
       console.error("Error creating customer:", error);
+      console.log("response", response)
   }
+}
+
+async function getCustomerById(customerId) {
+    // Construct the URL with the customerId variable
+    const url = `http://localhost:8080/api/customers/${customerId}`;
+    try {
+        const response = await fetch(url, {
+            method: 'GET'
+        });
+
+        if (!response.ok) {
+            throw new Error(`API call failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Customer:", data);
+        return data;
+    }
+    catch(error) {
+        console.error("Error retrieving customer:", error);
+    }
 }
 
 async function addAddressToCustomer(customerId, addressObject) {
@@ -101,6 +124,29 @@ async function updateAddress(customerId, addressObject) {
   catch(error) {
       console.error("Error updating address:", error);
   }
+}
+
+async function verifyCustomerByCredentials(username, password) {
+    // Construct the URL with the username and password variables
+    const url = `http://localhost:8080/api/customers/login?username=${username}&password=${password}`;
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            credentialsAsBool: true
+        });
+
+        if (!response.ok) {
+            throw new Error(`API call failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Credentials:", data);
+        return data;
+    }   
+    
+    catch(error) {
+        console.error("Error retrieving customer:", error);
+    }
 }
 
 async function deleteCustomerAddress(customerId, addressId) {
@@ -199,7 +245,7 @@ async function deleteCustomerCreditCard(customerId, cardId) {
   }
 }
 
-export { createCustomer, addAddressToCustomer, updateAddress, deleteCustomerAddress, addCreditCardToCustomer, updateCreditCard, deleteCustomerCreditCard };
+export { createCustomer, addAddressToCustomer, updateAddress, deleteCustomerAddress, addCreditCardToCustomer, updateCreditCard, deleteCustomerCreditCard, getCustomerById, verifyCustomerByCredentials};
 
 // Export the functions to be used in other files
 
