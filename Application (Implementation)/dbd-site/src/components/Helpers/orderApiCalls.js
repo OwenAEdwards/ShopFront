@@ -50,5 +50,26 @@ async function getOrdersByCustomer(customerId) {
   }
 }
 
+async function getOrderById(orderId) {
+  // Construct the URL with the orderId variable
+  const url = `http://localhost:8080/api/orders/${orderId}`;
+  try {
+      const response = await fetch(url, {
+          method: 'GET'
+      });
+
+      if (!response.ok) {
+          throw new Error(`API call failed with status ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Order:", data);
+  }
+  catch(error) {
+      console.error("Error retrieving order:", error);
+  }
+}
+
 //placeOrder(1, orderObject);
 //getOrdersByCustomer(1);
+//getOrderById(1);

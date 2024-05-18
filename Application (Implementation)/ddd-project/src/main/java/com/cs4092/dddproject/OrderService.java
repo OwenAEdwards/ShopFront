@@ -31,6 +31,7 @@ public class OrderService {
         // (Validation and Processing logic - refer to previous discussions)
         // - Validate order items and product quantities
         // - Process payment
+        // TODO: add support for processOrder() and Stock on Product
 
         // Save the order
         order = orderRepository.save(order);
