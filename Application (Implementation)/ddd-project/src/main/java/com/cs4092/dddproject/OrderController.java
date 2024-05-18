@@ -23,14 +23,18 @@ public class OrderController {
     }
 
     // Place a new order (assuming validation and processing happen within OrderService)
-    @PostMapping
+    @PostMapping("/{customerId}")
     public ResponseEntity<Order> placeOrder(@PathVariable Long customerId, @Valid @RequestBody Order order) {
         Customer customer = customerService.getCustomerById(customerId); // Assuming CustomerService is available
         if (customer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        if (customer.getCreditCards().isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
-        Order savedOrder = orderService.placeOrder(customer, order);
+        CreditCard firstCard = customer.getCreditCards().get(0); // Use the firstCard object
+        Order savedOrder = orderService.placeOrder(customer, firstCard, order);
         return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
     }
 

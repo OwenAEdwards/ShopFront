@@ -24,9 +24,9 @@ public class OrderService {
     }
 
     // Place a new order (assuming validation and processing happen within)
-    public Order placeOrder(Customer customer, Order order) {
-        // Set the customer for the order
-        order.setCustomer(customer);
+    public Order placeOrder(Customer customer, CreditCard creditCard, Order order) {
+        order.setCustomer(customer); // Set the customer for the order
+        order.setCreditCard(creditCard); // Set the credit card for the order
 
         // (Validation and Processing logic - refer to previous discussions)
         // - Validate order items and product quantities
