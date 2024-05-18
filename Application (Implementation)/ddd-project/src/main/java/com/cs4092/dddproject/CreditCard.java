@@ -29,7 +29,7 @@ public class CreditCard {
     @NotEmpty
     private String cardNumber;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id") // Foreign key
     private Order order;
 

@@ -1,5 +1,6 @@
 package com.cs4092.dddproject;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -20,15 +21,16 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false) // Foreign key
+    @JsonManagedReference
     private Customer customer;
 
     @Column(nullable = false)
     @NotEmpty
-    private String orderStatus; // e.g., "placed", "shipped", "completed", "canceled"
+    private String orderStatus; // e.g., "Placed", "Shipped", "Completed", "Canceled"
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id", nullable = false)
     private CreditCard creditCard;
 
