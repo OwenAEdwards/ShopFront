@@ -1,13 +1,13 @@
 // Login.js
 // Login Page for both users and staff members
 import React from 'react';
+import { clearCustomerAccount } from '../Objects/customerAccounts.objects';
 
 const Logout = () => {
-    console.log('Logout successful')
-
-    // Code to delete the login cookie
-    document.cookie = "loggedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
+    
+    // Clear the customer account
+    clearCustomerAccount();
+    
     return (
         <div>
             {/* Logout content */}

@@ -24,7 +24,7 @@ import { Dialog } from '@mui/material';
 import Cart from './Cart';
 import Searchbar from './Searchbar';
 import AdminTools from './AdminTools';
-import { checkCookie, checkAuth, checkName } from './Helpers/auth';
+import { checkIfLoggedIn, checkAuth, checkName } from './Helpers/auth';
 import {productsData} from './Objects/productsData.objects';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import UserProfile from './Auth/UserProfile';
@@ -67,7 +67,9 @@ function ResponsiveAppBar() {
   const pages = ['About'];
 
   // Menu items based on logged in status
-  if (checkCookie() == true) {
+  console.log("LOGG "+checkIfLoggedIn());
+
+  if (checkIfLoggedIn() == true) {
     settings.push('User Profile');
     settings.push('Logout');
   } else { 
@@ -261,7 +263,8 @@ function ResponsiveAppBar() {
       {showLogin && (
         <>
           <Dialog open={showLogin} onClose={() => setShowLogin(false)}>
-            {checkCookie() ? <Logout /> : <Login />}
+            <Login />
+            {checkIfLoggedIn() && <Logout />}
           </Dialog>
         </>
       )}
@@ -303,5 +306,4 @@ function ResponsiveAppBar() {
   );
 }
 export default ResponsiveAppBar;
-export { checkCookie, checkAuth };
 
