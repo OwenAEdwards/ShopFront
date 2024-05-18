@@ -33,7 +33,14 @@ public class OrderService {
         // - Process payment
 
         // Save the order
-        return orderRepository.save(order);
+        order = orderRepository.save(order);
+
+        // Manually add the order to the customer's list (assuming modifiable list)
+        List<Order> customerOrders = customer.getOrders();
+        customerOrders.add(order);
+        customer.setOrders(customerOrders); // Update the customer object with modified list
+
+        return order;
     }
 
     public void processOrder(Order order, Long targetWarehouseId) {
