@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 import Dialog from "@mui/material/Dialog";
 import Signup from "./Signup";
-import { userAccounts } from "../Objects/userAccounts.objects";
+import { verifyCustomerByCredentials } from "../Helpers/customerApiCalls";
 
 const Login = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -20,36 +20,33 @@ const Login = () => {
     setShowSignup(true);
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     const username = event.target.elements.username.value;
-  const userType = isAdmin ? "admin" : "user";
+    let password = "";
+    let user = null;
+    const userType = isAdmin ? "admin" : "user";
 
-  let creditCard = null;
+    if (!isAdmin) {
+      // Retrieve creditCard value only if the field exists (not admin)
+      password = event.target.elements.password?.value;
+    }
 
-  if (!isAdmin) {
-    // Retrieve creditCard value only if the field exists (not admin)
-    creditCard = event.target.elements.creditCard?.value;
-  }
 
-  const user = userAccounts.find(
-    (user) =>
-      user.username === username &&
-      user.accountType === userType &&
-      (isAdmin || user.creditCard === creditCard)
-  );
+    try {
+      user = await verifyCustomerByCredentials(username, password);
+      if (user == true) {
+        alert("Login successful");
+      } else {
+        alert("Invalid username and/or password");
+      }
+    }
+    catch (error) {
+      alert("Error retrieving user:", error);
+    }
 
-  if (user) {
-    alert("Login successful");
-    document.cookie = "loggedIn=true; path=/";
-    document.cookie = `userType=${userType}; path=/`;
-    document.cookie = `userName=${username}; path=/`;
-    window.location.reload();
-  } else {
-    alert("Invalid username or credit card number");
-  }
-};
+    };
 
   return (
     <Box
@@ -84,11 +81,11 @@ const Login = () => {
           {!isAdmin && (
             <Grid item>
               <TextField
-                id="creditCard"
+                id="Password"
                 type="password"
-                label="Credit Card Number"
+                label="Password"
                 variant="outlined"
-                name="creditCard"
+                name="password"
               />
             </Grid>
           )}

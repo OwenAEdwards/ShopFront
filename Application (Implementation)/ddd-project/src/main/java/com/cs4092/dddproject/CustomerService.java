@@ -104,7 +104,6 @@ public class CustomerService {
         return existingCard;
     }
 
-
     // Remove credit card for a customer
     public void removeCreditCard(Long customerId, Long cardId) {
         Customer customer = customerRepository.findById(customerId).get();
@@ -123,6 +122,18 @@ public class CustomerService {
         orderRepository.save(order);
         return order;
     }
+
+    // Login method to validate customer credentials
+    public boolean login(String username, String password) {
+
+        // Find the customer by username (assuming unique username)
+        Customer customer = customerRepository.findAll().stream()
+                .filter(c -> c.getName().equals(username))
+                .findFirst()
+                .orElse(null);
+
+        // Validate the customer and password
+        return customer != null && customer.getPassword().equals(password);}    
 
     // Find a customer by ID
     public Customer getCustomerById(Long id) {

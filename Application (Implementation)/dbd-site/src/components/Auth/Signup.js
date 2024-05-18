@@ -2,10 +2,23 @@ import { Grid, Input, Switch } from '@mui/material';
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { createCustomer } from '../Helpers/customerApiCalls';
+import { addAddressToCustomer, addCreditCardToCustomer, createCustomer } from '../Helpers/customerApiCalls';
 
 const Signup = () => {
     const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const [addressObject, setAddressObject] = useState({
+        addressType: '',
+        streetAddress: '',
+        city: '',
+        state: '',
+        zipCode: ''
+    });
+
+    const [creditCardObject, setCreditCardObject] = useState({
+        cardNumber: '',
+        expirationDate: ''
+    });
     const [isAdmin, setIsAdmin] = useState(false);
 
     const handleToggleChange = () => {
@@ -23,10 +36,14 @@ const Signup = () => {
         } else {
             const customerObject = {
                 name: userName,
+                password: password,
             };
-            
+
             try {
                 createCustomer(customerObject);
+                addAddressToCustomer(1, addressObject);
+                addCreditCardToCustomer(1, creditCardObject);
+
                 alert(`Created customer with username: ${userName}.`);
                 window.location.reload();
             } catch (error) {
@@ -63,12 +80,63 @@ const Signup = () => {
                         onChange={(e) => setUserName(e.target.value)} 
                         placeholder="Enter username"
                     />
-                    <br />
-                    <br />
-                    <br />
+                <br />
+                <Input 
+                    type="password"
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    placeholder="Enter password"
+                />
+                <br />
+                <h2>Address</h2>
+                <Input 
+                    value={addressObject.addressType} 
+                    onChange={(e) => setAddressObject({...addressObject, addressType: e.target.value})} 
+                    placeholder="Enter address type"
+                />
+                <br />
+                <Input 
+                    value={addressObject.streetAddress} 
+                    onChange={(e) => setAddressObject({...addressObject, streetAddress: e.target.value})} 
+                    placeholder="Enter street address"
+                />
+                <br />
+                <Input 
+                    value={addressObject.city} 
+                    onChange={(e) => setAddressObject({...addressObject, city: e.target.value})} 
+                    placeholder="Enter city"
+                />
+                <br />
+                <Input 
+                    value={addressObject.state} 
+                    onChange={(e) => setAddressObject({...addressObject, state: e.target.value})} 
+                    placeholder="Enter state"
+                />
+                <br />
+                <Input 
+                    value={addressObject.zipCode} 
+                    onChange={(e) => setAddressObject({...addressObject, zipCode: e.target.value})} 
+                    placeholder="Enter zip code"
+                />
+                <br />
+                <br />
+                <h2>Credit Card</h2>
+                <Input 
+                    value={creditCardObject.cardNumber} 
+                    onChange={(e) => setCreditCardObject({...creditCardObject, cardNumber: e.target.value})} 
+                    placeholder="Enter card number"
+                />
+                <br />
+                <Input 
+                    value={creditCardObject.expirationDate} 
+                    onChange={(e) => setCreditCardObject({...creditCardObject, expirationDate: e.target.value})} 
+                    placeholder="Enter expiration date (YYYY-MM-DD)"
+                />
+                <br />
+                <br />
                     <Button type="submit" variant="contained">
                         Create User
-                    </Button>    
+                    </Button>
                 </form>
             </Box>
         </Grid>

@@ -90,6 +90,13 @@ public class CustomerController {
         }
     }
 
+    // get a true / false response for a username and password matching a customer
+    @GetMapping("/login")
+    public ResponseEntity<Boolean> login(@RequestParam String username, @RequestParam String password) {
+        boolean login = customerService.login(username, password);
+        return new ResponseEntity<>(login, HttpStatus.OK);
+    }
+
     // Delete a credit card (hard deletion)
     @DeleteMapping("/{customerId}/credit-cards/{cardId}")
     public ResponseEntity<Void> removeCustomerCreditCard(@PathVariable Long customerId,

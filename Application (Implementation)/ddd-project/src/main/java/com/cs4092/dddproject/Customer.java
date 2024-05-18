@@ -37,4 +37,9 @@ public class Customer {
     @Column(precision = 10, scale = 2)
     @DecimalMin(value = "0.0")
     private BigDecimal balance;
+
+    @Column(nullable = false)
+    @NotEmpty
+    private String password;
+
 }
