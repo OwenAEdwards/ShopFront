@@ -25,12 +25,12 @@ public class DeliveryPlanService {
 
         // Create a delivery plan with calculated cost (adjust arguments based on your logic)
         DeliveryPlan deliveryPlan = new DeliveryPlan(
-                order.getOrderId(), // Assuming orderId from Order is used as foreign key
                 // Set delivery type based on logic (e.g., default, customer selection)
                 "standard",
                 deliveryPrice,
                 LocalDate.now().plusDays(2), // Placeholder, adjust based on your logic
-                LocalDate.now().plusDays(7)  // Placeholder, adjust based on your logic
+                LocalDate.now().plusDays(7),  // Placeholder, adjust based on your logic
+                order
         );
 
         // Save the delivery plan

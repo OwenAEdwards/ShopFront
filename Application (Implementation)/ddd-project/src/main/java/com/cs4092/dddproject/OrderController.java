@@ -33,7 +33,6 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        System.out.println("Made it this far!!!\n");
         CreditCard firstCard = customer.getCreditCards().get(0); // Use the firstCard object
         Order savedOrder = orderService.placeOrder(customer, firstCard, order);
         return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);

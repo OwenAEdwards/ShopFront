@@ -41,6 +41,11 @@ public class OrderService {
         customerOrders.add(order);
         customer.setOrders(customerOrders); // Update the customer object with modified list
 
+        // Manually add the order to the credit card's list (assuming modifiable list)
+        List<Order> creditCardOrders = creditCard.getOrders();
+        creditCardOrders.add(order);
+        creditCard.setOrders(creditCardOrders); // Update the credit card object with modified list
+
         return order;
     }
 

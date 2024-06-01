@@ -1,5 +1,6 @@
 package com.cs4092.dddproject;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -31,8 +32,9 @@ public class Order {
     @NotEmpty
     private String orderStatus; // e.g., "Placed", "Shipped", "Completed", "Canceled"
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "card_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_id", nullable = false) // Foreign key
+    @JsonBackReference
     private CreditCard creditCard;
 
     @Column(nullable = false)

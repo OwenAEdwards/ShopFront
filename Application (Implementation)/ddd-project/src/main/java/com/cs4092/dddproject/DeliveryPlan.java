@@ -16,9 +16,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeliveryPlan {
-    @Id // Primary key and foreign key to Order
+    @Id // Surrogate key: primary key and foreign key to Order
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    private Long deliveryPlanId;
 
     @Column(nullable = false)
     @NotEmpty
@@ -38,13 +38,13 @@ public class DeliveryPlan {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    // New constructor without Order as last argument (used in DeliveryPlanService)
-    public DeliveryPlan(Long orderId, String deliveryType, BigDecimal deliveryPrice,
-                        LocalDate deliveryDate, LocalDate shipDate) {
-        this.orderId = orderId;
+    // New constructor without deliveryPlanId (used in DeliveryPlanService.createDeliveryPlan())
+    public DeliveryPlan(String deliveryType, BigDecimal deliveryPrice,
+                        LocalDate deliveryDate, LocalDate shipDate, Order order) {
         this.deliveryType = deliveryType;
         this.deliveryPrice = deliveryPrice;
         this.deliveryDate = deliveryDate;
         this.shipDate = shipDate;
+        this.order = order;
     }
 }
