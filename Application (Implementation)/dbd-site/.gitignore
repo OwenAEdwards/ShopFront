@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# adding package-lock.json to reduce security vulnerabilities
+package-lock.json
+
 # testing
 /coverage
 
