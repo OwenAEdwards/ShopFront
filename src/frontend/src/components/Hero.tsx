@@ -27,7 +27,7 @@ const Hero = () => {
 
       {/* Main content */}
       <div className="relative z-20 container mx-auto text-white">
-        <h2 className="text-4xl font-bold mb-4">Welcome to Shopfront</h2>
+        <h2 className="text-4xl font-bold mb-4">Welcome to ShopFront</h2>
         <p className="text-lg mb-6">
           Your one-stop shop for everything awesome.
         </p>
