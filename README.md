@@ -26,7 +26,8 @@ An e-commerce platform with a Spring Boot backend and a React frontend styled wi
 
 ## Entity-Relationship (ER) Diagram
 
-![ER-diagram](./ER-model/ER-diagram%20model.png)
+![database_diagram](https://github.com/user-attachments/assets/f59a624c-8d23-448c-bc92-8c17cdd0f12a)
+
 
 ## Project Structure
 
