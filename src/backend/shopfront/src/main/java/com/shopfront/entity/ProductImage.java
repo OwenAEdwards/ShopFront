@@ -3,6 +3,7 @@ package com.shopfront.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "product_images")
 public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
