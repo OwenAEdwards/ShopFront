@@ -1,21 +1,9 @@
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
-
-interface Product {
-  product_id: string;
-  f_product_category_id: string;
-  f_created_by: string;
-  name: string;
-  description: string;
-  price: string;
-  stock_quantity: string;
-  image_url: string;
-  created_at: string;
-}
+import type { Product } from "@/dto/Product";
 
 interface FeaturedProductsProps {
   products: Product[];
 }
-
 export default function FeaturedProducts({ products }: FeaturedProductsProps) {
   return (
     <section className="container mx-auto py-10">
