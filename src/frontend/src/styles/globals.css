@@ -1,0 +1,60 @@
+/* src/styles/globals.css */
+
+/* 1) Pull in all of Tailwind (base, components, utilities) */
+@import "tailwindcss";
+
+/* 2) Define your CSS variables as before */
+:root {
+  --background: 255 255 255;
+  --foreground: 17 24 39;
+
+  --primary: 59 130 246;
+  --primary-foreground: 255 255 255;
+
+  --muted: 243 244 246;
+  --muted-foreground: 107 114 128;
+
+  --border: 229 231 235;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 17 24 39;
+  --foreground: 255 255 255;
+
+  --primary: 96 165 250;
+  --primary-foreground: 17 24 39;
+
+  --muted: 31 41 55;
+  --muted-foreground: 156 163 175;
+
+  --border: 55 65 81;
+}
+
+/* 3) Tell Tailwind which of your CSS vars to turn into theme colors */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+}
+
+/* 4) Now these utilities exist, you can safely @apply them */
+body {
+  @apply bg-background text-foreground font-sans antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+  @apply mx-auto px-4 max-w-7xl;
+}
