@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { useNavigate } from "react-router-dom"
 import { User, Settings, ShoppingCart, PackageIcon, LogOutIcon } from "lucide-react"
-import SimplePopover from "./SimplePopover"
+import SimplePopover from "./ui-custom/SimplePopover"
 
 const Navbar = () => {
   const navigate = useNavigate()
