@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
+import { useNavigate } from "react-router-dom"
 
 const Hero = () => {
+  const navigate = useNavigate()
+
   const [offsetY, setOffsetY] = useState(0)
   const handleScroll = () => setOffsetY(window.pageYOffset)
 
@@ -31,7 +34,7 @@ const Hero = () => {
         <p className="text-lg mb-6">
           Your one-stop shop for everything awesome.
         </p>
-        <Button>Shop Now</Button>
+        <Button className="cursor-pointer" onClick={() => navigate("/products")}>Shop Now</Button>
       </div>
 
       {/* Inline fog animation */}
