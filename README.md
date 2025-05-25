@@ -22,8 +22,7 @@ An e-commerce platform with a Spring Boot backend and a React frontend styled wi
 
 ## Entity-Relationship (ER) Diagram
 
-![database_diagram](https://github.com/user-attachments/assets/f59a624c-8d23-448c-bc92-8c17cdd0f12a)
-
+![ShopFront DB](https://github.com/user-attachments/assets/ed2e1f3a-fe9c-4f0f-9cad-65543eb3e18a)
 
 ## Project Structure
 
