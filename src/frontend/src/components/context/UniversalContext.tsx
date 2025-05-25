@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 // --- Types ---
 export type User = { id: string; name: string; email: string } | null;
-export type Product = { id: string; name: string; category: string; price: number };
+export type Product = { id: string; name: string; category: string; price: number; image?: string };
 export type CartItem = { productId: string; quantity: number };
 export type Filters = { category: string | null; search: string };
 
@@ -25,11 +25,11 @@ const UniversalContext = createContext<UniversalStore | undefined>(undefined);
 const MOCK_USER: User = { id: "u1", name: "John Doe", email: "john@example.com" };
 const MOCK_CATEGORIES = ["Electronics", "Books", "Fashion", "Home", "Toys"];
 const MOCK_PRODUCTS: Product[] = [
-  { id: "p1", name: "Laptop", category: "Electronics", price: 1200 },
-  { id: "p2", name: "Novel", category: "Books", price: 20 },
-  { id: "p3", name: "Sneakers", category: "Fashion", price: 80 },
-  { id: "p4", name: "Sofa", category: "Home", price: 350 },
-  { id: "p5", name: "Action Figure", category: "Toys", price: 25 },
+  { id: "p1", name: "Laptop", category: "Electronics", price: 1200, image: "vite.svg" },
+  { id: "p2", name: "Novel", category: "Books", price: 20, image: "vite.svg" },
+  { id: "p3", name: "Sneakers", category: "Fashion", price: 80, image: "vite.svg" },
+  { id: "p4", name: "Sofa", category: "Home", price: 350, image: "vite.svg" },
+  { id: "p5", name: "Action Figure", category: "Toys", price: 25, image: "vite.svg" },
 ];
 const MOCK_CART: CartItem[] = [{ productId: "p1", quantity: 1 }];
 

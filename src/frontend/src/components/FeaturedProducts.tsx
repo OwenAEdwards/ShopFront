@@ -4,6 +4,7 @@ import type { Product } from "@/dto/Product";
 interface FeaturedProductsProps {
   products: Product[];
 }
+
 export default function FeaturedProducts({ products }: FeaturedProductsProps) {
   return (
     <section className="container mx-auto py-10">
