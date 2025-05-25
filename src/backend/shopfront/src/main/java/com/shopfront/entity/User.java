@@ -34,10 +34,10 @@ public class User {
     @JsonIgnore
     private String passwordHash;
 
-    @Column(nullable = false)
+    // Allow room for country code
+    @Column(length = 20)
     private String phone;
 
-    @Column(nullable = false)
     private String address;
 
     @Column(nullable = false)
@@ -65,6 +65,8 @@ public class User {
     @Column(nullable = false)
     private Boolean isDeleted = false;
 
+    // URL can have unlimited length
+    @Column(length = 2083)
     private String profilePictureUrl;
 
     private LocalDateTime lastLogin;

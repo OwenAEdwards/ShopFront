@@ -21,7 +21,8 @@ public class ProductImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productImageId;
 
-    @Column(nullable = false)
+    // No defined max length for imageUrl in DB
+    @Column(nullable = false, length = 2083)
     private String imageUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
