@@ -1,5 +1,6 @@
 package com.shopfront.entity;
 
+import com.shopfront.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +30,7 @@ public class Order {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private String status;
+    private OrderStatus orderStatus;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal totalPrice;

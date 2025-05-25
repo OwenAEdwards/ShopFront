@@ -1,6 +1,7 @@
 package com.shopfront.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.shopfront.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,7 +42,7 @@ public class User {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private String role;
+    private UserRole role;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

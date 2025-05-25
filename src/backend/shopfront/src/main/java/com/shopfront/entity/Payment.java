@@ -1,5 +1,7 @@
 package com.shopfront.entity;
 
+import com.shopfront.enums.PaymentMethod;
+import com.shopfront.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,11 +30,11 @@ public class Payment {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private String paymentMethod;
+    private PaymentMethod paymentMethod;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private String paymentStatus;
+    private PaymentStatus paymentStatus;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal paymentAmount;
