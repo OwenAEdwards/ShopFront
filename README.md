@@ -2,10 +2,6 @@
 
 An e-commerce platform with a Spring Boot backend and a React frontend styled with Material UI.
 
-## Demo Video
-
-[Watch the demo video on YouTube!](https://youtu.be/ukTqc1NHN88)
-
 ## Project Overview
 
 ### Backend Overview
