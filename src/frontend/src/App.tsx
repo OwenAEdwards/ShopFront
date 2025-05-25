@@ -1,21 +1,27 @@
-import Navbar from "@/components/Navbar"
-import Hero from "@/components/Hero"
-import FeaturedProducts from "@/components/FeaturedProducts"
-import Categories from "@/components/Categories"
-import Newsletter from "@/components/Newsletter"
-import Footer from "@/components/Footer"
+import { BrowserRouter as Router } from "react-router-dom";
+import AnimatedRoutes from "./RoutesWithAnimations";
 
-function App() {
+// Components
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
+// Styles
+import "./styles/globals.css";
+import PageNavigator from "./components/PageNavigator";
+
+const App = () => {
   return (
-    <div className="flex flex-col min-h-svh">
-      <Navbar />
-      <Hero />
-      <FeaturedProducts />
-      <Categories />
-      <Newsletter />
-      <Footer />
-    </div>
-  )
-}
+    <Router>
+      <div className="flex flex-col min-h-svh">
+        <Navbar />
+        <PageNavigator />
+        <main className="flex-1">
+          <AnimatedRoutes />
+        </main>
+        <Footer />
+      </div>
+    </Router>
+  );
+};
 
-export default App
+export default App;

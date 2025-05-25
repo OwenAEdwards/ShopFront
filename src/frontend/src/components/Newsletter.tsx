@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button"
 
+
 const Newsletter = () => (
-  <section className="bg-gray-50 dark:bg-gray-800 py-16">
-    <div className="container mx-auto text-center">
+  <section className="bg-gray-100 dark:bg-gray-800 py-16">
+    <div className="container mx-auto text-center" >
       <h4 className="text-xl font-bold mb-2">Stay Updated</h4>
       <p className="mb-4 text-gray-600 dark:text-gray-300">
         Get the latest deals and updates right in your inbox.
