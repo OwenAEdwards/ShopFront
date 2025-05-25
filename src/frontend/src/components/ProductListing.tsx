@@ -7,7 +7,7 @@ function ProductListing(props: any) {
   const { products: { value: mockProducts } } = useUniversal();
 
   const filteredProducts = category
-    ? mockProducts.filter((product) => product.category === category)
+    ? mockProducts.filter((product) => product.product_category_id === category)
     : mockProducts;
 
   return (
@@ -18,11 +18,11 @@ function ProductListing(props: any) {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {filteredProducts.map((product) => (
           <ProductCard
-            key={product.id}
-            id={product.id}
+            key={product.product_id}
+            id={product.product_id}
             name={product.name}
             price={product.price}
-            image={product.image}
+            image={undefined} // Ensure image is optional
           />
         ))}
       </div>

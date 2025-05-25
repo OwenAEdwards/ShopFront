@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-
-// --- Types ---
-export type User = { id: string; name: string; email: string } | null;
-export type Product = { id: string; name: string; category: string; price: number; image?: string };
-export type CartItem = { productId: string; quantity: number };
-export type Filters = { category: string | null; search: string };
+// Import DTO interfaces from your centralized dtos file
+import type {
+  UserDTO,
+  ProductDTO,
+  CartItemDTO,
+  Filters,
+} from "@/dto/dtos";
 
 // --- Store Shape ---
 type Store<T> = {
@@ -13,38 +14,59 @@ type Store<T> = {
 };
 
 type UniversalStore = {
-  user: Store<User>;
+  user: Store<UserDTO>;
   filters: Store<Filters>;
   categories: Store<string[]>;
-  products: Store<Product[]>;
-  cart: Store<CartItem[]>;
+  products: Store<ProductDTO[]>;
+  cart: Store<CartItemDTO[]>;
 };
 
 const UniversalContext = createContext<UniversalStore | undefined>(undefined);
 
-const MOCK_USER: User = { id: "u1", name: "John Doe", email: "john@example.com" };
+// Mock data adapted to DTO shapes
+const MOCK_USER: UserDTO = {
+  user_id: 1,
+  name: "John Doe",
+  email: "john@example.com",
+  password_hash: "<hashed>",
+  role: "CUSTOMER",
+  is_active: true,
+  is_deleted: false,
+};
 const MOCK_CATEGORIES = ["Electronics", "Books", "Fashion", "Home", "Toys"];
-const MOCK_PRODUCTS: Product[] = [
-  { id: "p1", name: "Laptop", category: "Electronics", price: 1200, image: "vite.svg" },
-  { id: "p2", name: "Novel", category: "Books", price: 20, image: "vite.svg" },
-  { id: "p3", name: "Sneakers", category: "Fashion", price: 80, image: "vite.svg" },
-  { id: "p4", name: "Sofa", category: "Home", price: 350, image: "vite.svg" },
-  { id: "p5", name: "Action Figure", category: "Toys", price: 25, image: "vite.svg" },
+const MOCK_PRODUCTS: ProductDTO[] = [
+  {
+    product_id: 1,
+    name: "Laptop",
+    description: "High-performance laptop",
+    price: 1200,
+    stock_quantity: 10,
+    product_category_id: 1,
+    created_by: 1,
+  },
+  {
+    product_id: 2,
+    name: "Novel",
+    description: "Bestselling novel",
+    price: 20,
+    stock_quantity: 50,
+    product_category_id: 2,
+    created_by: 1,
+  },
+  // ...other products
 ];
-const MOCK_CART: CartItem[] = [{ productId: "p1", quantity: 1 }];
+const MOCK_CART: CartItemDTO[] = [{ cart_item_id: 1, cart_id: 1, product_id: 1, quantity: 1 }];
 
 export const UniversalProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User>(null);
+  const [user, setUser] = useState<UserDTO>(MOCK_USER);
   const [filters, setFilters] = useState<Filters>({ category: null, search: "" });
-  const [categories, setCategories] = useState<string[]>([]);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [categories, setCategories] = useState<string[]>(MOCK_CATEGORIES);
+  const [products, setProducts] = useState<ProductDTO[]>(MOCK_PRODUCTS);
+  const [cart, setCart] = useState<CartItemDTO[]>(MOCK_CART);
 
+  // If you fetch from an API, replace the above defaults and useEffect
   useEffect(() => {
-    setUser(MOCK_USER);
-    setCategories(MOCK_CATEGORIES);
-    setProducts(MOCK_PRODUCTS);
-    setCart(MOCK_CART);
+    // e.g. fetch and set real data
   }, []);
 
   const store: UniversalStore = {

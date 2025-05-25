@@ -1,8 +1,8 @@
-import type { Product } from "@/dto/Product";
+import type { ProductDTO } from "@/dto/dtos";
 import ProductCard from "./ui-custom/ProductCard";
 
 interface FeaturedProductsProps {
-  products: Product[];
+  products: ProductDTO[];
 }
 
 export default function FeaturedProducts({ products }: FeaturedProductsProps) {
@@ -16,7 +16,7 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
             id={product.product_id}
             name={product.name}
             price={product.price}
-            image={product.image_url || undefined}
+            image={undefined}
           />
         ))}
       </div>

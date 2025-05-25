@@ -1,54 +1,15 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import type { Product } from "@/dto/Product";
+import type { Product } from "@/dto/dtos";
 
 // Pages & Components
-import Hero from "@/components/Hero";
-import FeaturedProducts from "@/components/FeaturedProducts";
-import Categories from "@/components/Categories";
-import Newsletter from "@/components/Newsletter";
 import ProductDetailPage from "@/pages/ProductDetailPage";
 import ProductListingPage from "@/pages/ProductListingPage";
 import AboutPage from "@/pages/AboutPage";
 import CartPage from "@/pages/CartPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import PageWrapper from "@/components/context/PageWrapper";
-
-const ProductMock: Product[] = [
-  {
-    product_id: "1",
-    f_product_category_id: "1",
-    f_created_by: "1",
-    name: "Product 1",
-    description: "Description for Product 1",
-    price: "$10.00",
-    stock_quantity: "100",
-    image_url: "https://via.placeholder.com/150",
-    created_at: new Date().toISOString(),
-  },
-  {
-    product_id: "2",
-    f_product_category_id: "1",
-    f_created_by: "1",
-    name: "Product 2",
-    description: "Description for Product 2",
-    price: "$20.00",
-    stock_quantity: "50",
-    image_url: "https://via.placeholder.com/150",
-    created_at: new Date().toISOString(),
-  },
-  {
-    product_id: "3",
-    f_product_category_id: "1",
-    f_created_by: "1",
-    name: "Product 3",
-    description: "Description for Product 3",
-    price: "$30.00",
-    stock_quantity: "25",
-    image_url: "https://via.placeholder.com/150",
-    created_at: new Date().toISOString(),
-  },
-];
+import HomePage from "./pages/HomePage";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -66,10 +27,7 @@ const AnimatedRoutes = () => {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
               >
-                <Hero />
-                <FeaturedProducts products={ProductMock} />
-                <Categories />
-                <Newsletter />
+                <HomePage />
               </motion.div>
             </PageWrapper>
           }
