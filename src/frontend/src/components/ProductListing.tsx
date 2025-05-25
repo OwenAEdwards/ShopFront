@@ -1,5 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import ProductCard from "./ui-custom/ProductCard";
 import { useUniversal } from "./context/UniversalContext";
 
 function ProductListing(props: any) {
@@ -18,26 +17,19 @@ function ProductListing(props: any) {
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {filteredProducts.map((product) => (
-          <Card key={product.id} className="flex flex-col">
-            <CardHeader>
-              <img
-                src={product.image}
-                alt={product.name}
-                className="rounded-lg object-cover w-full h-40"
-              />
-            </CardHeader>
-            <CardContent className="flex-1 flex flex-col justify-between">
-              <div>
-                <CardTitle>{product.name}</CardTitle>
-                <p className="text-muted-foreground">{product.price}</p>
-              </div>
-              <Button className="mt-4 w-full">Add to Cart</Button>
-            </CardContent>
-          </Card>
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            name={product.name}
+            price={product.price}
+            image={product.image}
+          />
         ))}
       </div>
       {filteredProducts.length === 0 && (
-        <p className="mt-8 text-center text-muted-foreground">No products found for this category.</p>
+        <p className="mt-8 text-center text-muted-foreground">
+          No products found for this category.
+        </p>
       )}
     </div>
   );
