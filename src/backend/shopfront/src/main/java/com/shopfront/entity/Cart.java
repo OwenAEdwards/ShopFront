@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
-@Table(name = "carts")
+@Table(name = "cart")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

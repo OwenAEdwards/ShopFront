@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
-@Table(name = "product_categories")
+@Table(name = "product_category")
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
